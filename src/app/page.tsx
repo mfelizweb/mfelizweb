@@ -13,7 +13,7 @@ export default function HomePage() {
           Services
         </h2>
         <p className="mt-3 text-lg text-gray-600 dark:text-gray-300">
-          Your strengths: Mobile and Web. We also cover NFC, payments, and ongoing support.
+          Mobile App, Web,NFC,Chats Bot , AI,BlockChain, payments  and ongoing support.
         </p>
 
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
