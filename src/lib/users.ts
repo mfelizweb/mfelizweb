@@ -1,0 +1,50 @@
+import { DriverProfile } from "@/types/DriverProfile";
+
+export const users: DriverProfile[] = [
+{
+username: "joseNunez",
+name: "jose Nunez",
+title: "Professional Driver",
+city: "New Jersy ",
+vehicle: "Toyota Rav4  2018",
+avatar: "/NFC/DRIVERS/JOSENUNEZ/JN.JPG",
+//website: "https://jose.dev",
+email: "nunezjose23.jn@gmail.com",
+phone: "+1-917-557-5993",
+whatsapp: "+19175575993",
+//instagram: "jose.driver",
+zelle: "9175575993",
+cardColor: "#9d0808ff",
+///carPhotos: [
+//"/1.png",
+///"/2.jpg",
+//"/3.jpg"
+//],
+frase: "Reliable and punctual driver",
+showVCardDownload: true
+},
+{
+username: "maddielfeliz",
+name: "Maddiel Feliz",
+title: "Professional Driver",
+city: "New York",
+vehicle: "Honda Crv 2025",
+avatar: "/NFC/DRIVERS/maddielfeliz/maddielfeliz.JPG",
+//website: "https://jose.dev",
+//email: "nunezjose23.jn@gmail.com",
+phone: "+1-929-240-6734",
+whatsapp: "+19292406734",
+//instagram: "jose.driver",
+zelle: "9292406734",
+cardColor: "#00431eff",
+///carPhotos: [
+//"/1.png",
+///"/2.jpg",
+//"/3.jpg"
+//],
+frase: "Reliable and punctual driver",
+showVCardDownload: true
+},
+
+
+];
