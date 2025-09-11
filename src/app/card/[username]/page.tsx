@@ -27,7 +27,7 @@ export default function CardPage({ params }: Props) {
   className="rounded-2xl w-full h-auto"
 />
  
-        <h1 className="mt-4 text-2xl font-bold">{profile.name} Driver</h1>
+        <h1 className="mt-4 text-2xl font-bold">{profile.name}  </h1>
         <p className="text-slate-600 dark:text-slate-300">{profile.title}</p>
 
         <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
@@ -94,14 +94,5 @@ const demoProfiles: Record<
     primaryCtaUrl: string;
   }
 > = {
-  demo: {
-    name: "jhon smith",
-    title: "Full Stack Developer",
-    avatarUrl: "https://api.dicebear.com/8.x/avataaars/svg?seed=demo",
-    whatsapp: "+1 1222222",
-    phone: "+222222",
-    calendarUrl: "https://cal.com/mfeliz",
-    primaryCtaLabel: "Let's build your app",
-    primaryCtaUrl: "https://wa.me/1111111111"
-  }
+ 
 };

@@ -89,7 +89,7 @@ export default function UserCard({ profile }: { profile: DriverProfile }) {
             priority
           />
         )}
-        <h1 className="text-3xl font-bold text-white text-center">{name}</h1>
+        <h1 className="text-3xl font-bold text-white text-center">{name} Driver</h1>
         {title && <p className="text-lg text-white/80 text-center">{title}</p>}
         {city && <p className="text-sm text-white/60 mb-1 text-center">{city}</p>}
 {vehicle && <p className="text-sm text-white/60 mb-1 text-center">{vehicle}</p>}
@@ -164,7 +164,7 @@ export default function UserCard({ profile }: { profile: DriverProfile }) {
             style={{ backgroundColor: cardColor }}
           >
             <Car className="w-4 h-4" />
-            See Car
+            See Photos
           </button>
         )}
 

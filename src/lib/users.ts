@@ -46,5 +46,26 @@ frase: "Reliable and punctual driver",
 showVCardDownload: true
 },
 
-
+{
+username: "LenninGarcia",
+name: "Lennin Garcia",
+title: "Professional Shoe Customizer",
+city: "New York",
+//vehicle: "Honda Crv 2025",
+avatar: "/NFC/DRIVERS/LENNYGARCIA/lenny.jpg",
+//website: "https://jose.dev",
+email: "Lenningarcia@hotmail.com",
+phone: "+1-646-357-0290",
+whatsapp: "+16463570290",
+//instagram: "jose.driver",
+zelle: "6463570290",
+cardColor: "#070027",
+carPhotos: [
+"/NFC/DRIVERS/LENNYGARCIA/1.png",
+"/NFC/DRIVERS/LENNYGARCIA/2.jpg",
+"/NFC/DRIVERS/LENNYGARCIA/3.jpg"
+],
+//frase: "Reliable and punctual driver",
+showVCardDownload: true
+},
 ];
