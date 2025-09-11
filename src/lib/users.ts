@@ -61,7 +61,7 @@ whatsapp: "+16463570290",
 zelle: "6463570290",
 cardColor: "#070027",
 carPhotos: [
-"/NFC/DRIVERS/LENNYGARCIA/1.png",
+"/NFC/DRIVERS/LENNYGARCIA/1.jpg",
 "/NFC/DRIVERS/LENNYGARCIA/2.jpg",
 "/NFC/DRIVERS/LENNYGARCIA/3.jpg"
 ],
