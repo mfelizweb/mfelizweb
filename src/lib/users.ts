@@ -3,7 +3,7 @@ import { DriverProfile } from "@/types/DriverProfile";
 export const users: DriverProfile[] = [
 {
 username: "joseNunez",
-name: "jose Nunez",
+name: "jose Nunez Driver",
 title: "Professional Driver",
 city: "New Jersy ",
 vehicle: "Toyota Rav4  2018",
@@ -25,7 +25,7 @@ showVCardDownload: true
 },
 {
 username: "maddielfeliz",
-name: "Maddiel Feliz",
+name: "Maddiel Feliz Driver",
 title: "Professional Driver",
 city: "New York",
 vehicle: "Honda Crv 2025",
