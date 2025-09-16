@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const links = [
-  { href: "/services", label: "Servicios" },
-  { href: "/portfolio", label: "Portafolio" },
-  { href: "/contact", label: "Contacto" }
+  { href: "/services", label: "Services" },
+  { href: "/portfolio", label: "Porfolio" },
+  { href: "/contact", label: "Contact" }
 ];
 
 export default function NavBar() {
