@@ -1,4 +1,4 @@
-import ChatEstimator from "@/components/ChatEstimator";
+import ChatEstimator from "@/components/ProjectPlanner";
 
 export default function EstimatePage() {
 return (
