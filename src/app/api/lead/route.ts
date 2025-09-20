@@ -1,14 +1,6 @@
 // src/app/api/lead/route.ts
 export const runtime = "nodejs";
-export async function GET() {
-  return new Response(
-    JSON.stringify({ ok: true, message: "Lead API alive" }),
-    {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    }
-  );
-}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -56,11 +48,12 @@ export async function POST(req: Request) {
     });
 
     return new Response(JSON.stringify({ ok: true }));
-  } catch (e: any) {
+  } catch (e: unknown) {
+    const message =
+      e instanceof Error ? e.message : "Unknown error";
     return new Response(
-      JSON.stringify({ ok: false, error: e?.message || "Unknown" }),
+      JSON.stringify({ ok: false, error: message }),
       { status: 500 }
     );
   }
-  
 }
