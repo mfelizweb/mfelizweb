@@ -1,6 +1,16 @@
-"use client";
+ "use client";
 import { useEffect, useState } from "react";
 import ServiceCard from "@/components/ServiceCard";
+
+// 📦 Iconos de lucide-react
+import {
+  Globe,
+  Smartphone,
+  Contact,
+  CreditCard,
+  Wrench,
+  Bot,
+} from "lucide-react";
 
 export default function ServicesPage() {
   const [lang, setLang] = useState<"es" | "en">("en");
@@ -17,6 +27,7 @@ export default function ServicesPage() {
       subtitle: "Soluciones modulares: elige solo lo que tu negocio necesita.",
       services: [
         {
+          icon: Globe,
           title: { es: "Diseño y Desarrollo Web", en: "Web Design & Development" },
           description: {
             es: "Sitios modernos, rápidos y optimizados para atraer clientes.",
@@ -25,6 +36,7 @@ export default function ServicesPage() {
           href: "/services/web",
         },
         {
+          icon: Smartphone,
           title: { es: "Aplicaciones Móviles", en: "Mobile Apps" },
           description: {
             es: "Apps profesionales para iOS y Android, fáciles de usar y seguras.",
@@ -33,6 +45,7 @@ export default function ServicesPage() {
           href: "/services/mobile",
         },
         {
+          icon: Contact,
           title: { es: "Tarjetas NFC Inteligentes", en: "NFC Smart Cards" },
           description: {
             es: "Tarjetas de contacto inteligentes con QR y estadísticas.",
@@ -41,6 +54,7 @@ export default function ServicesPage() {
           href: "/services/nfc",
         },
         {
+          icon: CreditCard,
           title: { es: "Pagos en Línea", en: "E-Payments Integration" },
           description: {
             es: "Cobros fáciles y seguros: enlaces, suscripciones y checkout.",
@@ -49,6 +63,7 @@ export default function ServicesPage() {
           href: "/services/payments",
         },
         {
+          icon: Wrench,
           title: { es: "Mantenimiento & Soporte", en: "Maintenance & Support" },
           description: {
             es: "Planes mensuales para mantener tu web siempre estable y segura.",
@@ -58,6 +73,7 @@ export default function ServicesPage() {
         },
       ],
       ai: {
+        icon: Bot,
         title: "Asistentes de IA & Chatbots",
         subtitle:
           "Chatbots inteligentes que responden preguntas, atienden clientes 24/7 y capturan prospectos para tu negocio.",
@@ -68,6 +84,7 @@ export default function ServicesPage() {
       subtitle: "Modular solutions — choose only what your business needs.",
       services: [
         {
+          icon: Globe,
           title: { es: "Diseño y Desarrollo Web", en: "Web Design & Development" },
           description: {
             es: "Sitios modernos, rápidos y optimizados para atraer clientes.",
@@ -76,6 +93,7 @@ export default function ServicesPage() {
           href: "/services/web",
         },
         {
+          icon: Smartphone,
           title: { es: "Aplicaciones Móviles", en: "Mobile Apps" },
           description: {
             es: "Apps profesionales para iOS y Android, fáciles de usar y seguras.",
@@ -84,6 +102,7 @@ export default function ServicesPage() {
           href: "/services/mobile",
         },
         {
+          icon: Contact,
           title: { es: "Tarjetas NFC Inteligentes", en: "NFC Smart Cards" },
           description: {
             es: "Tarjetas de contacto inteligentes con QR y estadísticas.",
@@ -92,6 +111,7 @@ export default function ServicesPage() {
           href: "/services/nfc",
         },
         {
+          icon: CreditCard,
           title: { es: "Pagos en Línea", en: "E-Payments Integration" },
           description: {
             es: "Cobros fáciles y seguros: enlaces, suscripciones y checkout.",
@@ -100,6 +120,7 @@ export default function ServicesPage() {
           href: "/services/payments",
         },
         {
+          icon: Wrench,
           title: { es: "Mantenimiento & Soporte", en: "Maintenance & Support" },
           description: {
             es: "Planes mensuales para mantener tu web siempre estable y segura.",
@@ -109,6 +130,7 @@ export default function ServicesPage() {
         },
       ],
       ai: {
+        icon: Bot,
         title: "AI Assistants & Chatbots",
         subtitle:
           "Smart chatbots that answer questions, serve customers 24/7, and capture leads for your business.",
@@ -129,6 +151,8 @@ export default function ServicesPage() {
         {t.services.map((service, i) => (
           <ServiceCard
             key={i}
+            icon={<service.icon className="w-8 h-8 text-indigo-500" />}
+
             title={service.title}
             description={service.description}
             href={service.href}
@@ -137,9 +161,12 @@ export default function ServicesPage() {
       </div>
 
       <div id="ai" className="mt-16">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          {t.ai.title}
-        </h2>
+        <div className="flex items-center gap-3">
+          <t.ai.icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+            {t.ai.title}
+          </h2>
+        </div>
         <p className="mt-3 text-gray-600 dark:text-gray-300 text-base">
           {t.ai.subtitle}
         </p>
