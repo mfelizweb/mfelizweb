@@ -8,21 +8,21 @@ const texts = {
     title1: "Haz crecer tu negocio",
     title2: "rápido y con presupuesto real",
     subtitle:
-      "Páginas web y apps móviles para negocios de Yonkers. Más clientes, más reservas y mejor presencia en Google.",
+      "Páginas web y apps móviles para Tu negocios  . Más clientes, más reservas y mejor presencia en Google.",
     bullets: ["Móvil y rápido", "Aparece en Google/Maps", "Listo en pocos días"],
     ctaEstimate: "Pide tu cotización gratis",
     ctaWhatsApp: "Escríbenos por WhatsApp",
-    srHero: "Servicios web y móviles para negocios locales en Yonkers",
+    srHero: "Servicios web y móviles para negocios locales ",
   },
   en: {
     title1: "Grow your business",
     title2: "fast and within budget",
     subtitle:
-      "Websites and mobile apps for Yonkers businesses. Get more customers, more bookings, and better visibility on Google.",
+      "Websites and mobile apps for Your businesses. Get more customers, more bookings, and better visibility on Google.",
     bullets: ["Mobile-friendly", "Show up on Google/Maps", "Ready in days"],
     ctaEstimate: "Get your free estimate",
     ctaWhatsApp: "Message us on WhatsApp",
-    srHero: "Web and mobile services for local businesses in Yonkers",
+    srHero: "Web and mobile services for local businesses ",
   },
 };
 

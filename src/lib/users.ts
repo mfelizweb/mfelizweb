@@ -68,4 +68,51 @@ carPhotos: [
 //frase: "Reliable and punctual driver",
 showVCardDownload: true
 },
+
+
+{
+username: "PedroLuisPeralta",
+name: " Pedro Luis Peralta",
+title: "Soon",
+city: "Soon",
+vehicle: "Soon",
+avatar: "/Logo.jpg",
+//website: "https://jose.dev",
+email: "Soon",
+phone: "Soon",
+whatsapp: "Soon",
+//instagram: "jose.driver",
+zelle: "Soon",
+cardColor: "#fae502ff",
+///carPhotos: [
+//"/1.png",
+///"/2.jpg",
+//"/3.jpg"
+//],
+frase: "Reliable and punctual driver",
+showVCardDownload: true
+},
+
+{
+username: "FaryGarcia",
+name: " Fary Garcia",
+title: "Soon",
+city: "Soon",
+vehicle: "Soon",
+avatar: "/Logo.jpg",
+//website: "https://jose.dev",
+email: "Soon",
+phone: "Soon",
+whatsapp: "Soon",
+//instagram: "jose.driver",
+zelle: "Soon",
+cardColor: "#2302faff",
+///carPhotos: [
+//"/1.png",
+///"/2.jpg",
+//"/3.jpg"
+//],
+frase: "Reliable and punctual driver",
+showVCardDownload: true
+},
 ];
