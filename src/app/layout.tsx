@@ -28,19 +28,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <AppShell>{children}</AppShell>
 
-        {/* ✅ Google Ads Tag */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-11393015388"
-        />
-        <Script id="google-ads" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-11393015388');
-          `}
-        </Script>
+         {/* ✅ Google Analytics 4 */}
+<Script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-EBJYM7DTD3"
+/>
+<Script id="ga4" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EBJYM7DTD3');
+  `}
+</Script>
+
+{/* ✅ Google Ads Tag */}
+<Script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=AW-11393015388"
+/>
+<Script id="google-ads" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-11393015388');
+  `}
+</Script>
+
 
         
         {/* ✅ Vercel Analytics */}
