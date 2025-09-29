@@ -4,6 +4,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
+ 
+ 
+
+const projects = [
+{ src: "/chonji.png", titleEs: "Chonji Academy", titleEn: "Chonji Academy" },
+{ src: "/lacustore.png", titleEs: "Lacu Store", titleEn: "Lacu Store" },
+{ src: "/cdl.png", titleEs: "CDL COACH APP", titleEn: "CDL COACH APP" },
+];
 // —— Types ——
 type Plan = {
   id: string;            // <-- value para el <select>
@@ -39,14 +47,14 @@ type LangDict = {
 // —— Adjustable constants ——
 const WHATSAPP_PHONE = "19292406734";
 const WHATSAPP_PRETEXT_ES =
-  "Hola, vi su landing. Quiero mejorar mi negocio en Yonkers (web/SEO/anuncios).";
+  "Hola, vi su landing. Quiero mejorar mi negocio  (web/SEO/anuncios).";
 const WHATSAPP_PRETEXT_EN =
-  "Hi! I saw your landing. I want to grow my business in Yonkers (web/SEO/ads).";
+  "Hi! I saw your landing. I want to grow my business   (web/SEO/ads).";
 
 // —— Translations ——
 const dict: Record<"es" | "en", LangDict> = {
   es: {
-    heroH1: "Más clientes para tu negocio en Yonkers",
+    heroH1: "Más clientes para tu negocio  ",
     heroSub:
       "Sitio web profesional, SEO local y anuncios digitales — todo optimizado para celulares.",
     ctaWhatsApp: "Hablar por WhatsApp",
@@ -70,44 +78,77 @@ const dict: Record<"es" | "en", LangDict> = {
       "Tus redes sociales no convierten",
     ],
     pricingTitle: "Paquetes simples",
-    pricingNote: "Ejemplos — ajustamos a tu negocio",
-    plans: [
-      {
-        id: "plan-basic",
-        name: "Básico Local",
-        price: "$400 pago único",
-        bullets: ["Sitio web sencillo", "Perfil en Google Maps", "Formulario o WhatsApp"],
-      },
-      {
-        id: "plan-seo",
-        name: "SEO Pro",
-        price: "$600 pago único",
-        bullets: ["Web completa (hasta 6 secciones)", "Optimización SEO local", "Analítica básica"],
-        popular: true,
-      },
-      {
-        id: "plan-ads",
-        name: "Impulso Ads",
-        price: "$800 pago único",
-        bullets: [
-          "Web + SEO local",
-          "Analítica avanzada",
-          "Campaña inicial de anuncios (el presupuesto lo paga el cliente)",
-        ],
-      },
+    pricingNote: "no precios ocultos",
+  plans: [
+  {
+    id: "plan-basic",
+    name: "Plan   Básico",
+    price: "$399 pago único",
+    bullets: [
+      "Sitio web informativo (1 sección)",
+      "Perfil en Google Maps",
+      "Formulario o WhatsApp",
+      "Hosting y SSL por 1 año",
+      "Diseño optimizado para móvil",
+      "Soporte técnico inicial"
     ],
-    webExtra: {
-      id: "web-extra",
-      name: "Soporte & Rediseño",
-      price: "Desde $99",
-      desc: "Para webs existentes — arreglos, rediseño o mantenimiento según necesidad.",
-      bullets: [
-        "Corrección de errores o bugs",
-        "Reparar imágenes o enlaces rotos",
-        "Mejoras de diseño",
-        "Mantenimiento técnico básico",
-      ],
-    },
+  },
+  {
+    id: "plan-seo",
+    name: "Plan Pro  ",
+    price: "$599 pago único",
+    bullets: [
+      "Sitio completo (hasta 6 secciones)",
+      "Optimización SEO local",
+      "Analítica básica",
+      "Chat en línea",
+      "Hosting y SSL por 1 año",
+      "Diseño moderno y rápido",
+      "Soporte técnico prioritario"
+    ],
+    popular: true,
+  },
+  {
+    id: "plan-ads",
+    name: "Plan Premium Impulso",
+    price: "$799 pago único",
+    bullets: [
+      "Todo lo del plan Pro",
+      "Analítica avanzada (eventos, mapas de clics)",
+      "Campaña inicial de anuncios (el presupuesto lo paga el cliente)",
+      "Notificaciones automáticas",
+      "Backups automáticos 30 días",
+      "Integración con redes sociales"
+    ],
+  },
+  {
+    id: "plan-enterprise",
+    name: "Plan Empresa / Enterprise",
+    price: "A cotizar",
+    bullets: [
+      "Proyectos personalizados",
+      "Integraciones avanzadas",
+      "Funcionalidades únicas",
+      "Apps móviles o portales",
+      "Diseños a medida",
+      "Contáctanos para una propuesta"
+    ],
+  },
+],
+
+webExtra: {
+  id: "web-extra",
+  name: "Soporte & Rediseño",
+  price: "Desde $50",
+  desc: "Para webs existentes — arreglos, rediseño o mantenimiento según necesidad.",
+  bullets: [
+    "Corrección de errores o bugs",
+    "Reparar imágenes o enlaces rotos",
+    "Mejoras de diseño",
+    "Mantenimiento técnico básico",
+  ],
+},
+
     appsTitle: "¿Quieres tu propia app móvil?",
     appsNote: "Planes claros — publicación en Android e iOS",
     appsPlans: [
@@ -163,7 +204,7 @@ const dict: Record<"es" | "en", LangDict> = {
   },
 
   en: {
-    heroH1: "Get more customers in Yonkers",
+    heroH1: "Get more customers ",
     heroSub:
       "Professional website, local SEO, and digital ads — all optimized for mobile.",
     ctaWhatsApp: "Chat on WhatsApp",
@@ -187,44 +228,77 @@ const dict: Record<"es" | "en", LangDict> = {
       "Your social media isn’t bringing customers",
     ],
     pricingTitle: "Simple packages",
-    pricingNote: "Examples — we tailor to your needs",
-    plans: [
-      {
-        id: "plan-basic",
-        name: "Local Basic",
-        price: "$400 one-time",
-        bullets: ["Simple website", "Google Maps profile", "Form or WhatsApp"],
-      },
-      {
-        id: "plan-seo",
-        name: "SEO Pro",
-        price: "$600 one-time",
-        bullets: ["Full website (up to 6 sections)", "Local SEO optimization", "Basic analytics"],
-        popular: true,
-      },
-      {
-        id: "plan-ads",
-        name: "Boost Ads",
-        price: "$800 one-time",
-        bullets: [
-          "Website + Local SEO",
-          "Advanced analytics",
-          "Initial ads campaign (ad spend paid by client)",
-        ],
-      },
+    pricingNote: "no hidden prices",
+  plans: [
+  {
+    id: "plan-basic",
+    name: "  Basic Plan",
+    price: "$400 one-time",
+    bullets: [
+      "Informational website (1 section)",
+      "Google Maps profile",
+      "Contact form or WhatsApp",
+      "1 year hosting and SSL included",
+      "Mobile-optimized design",
+      "Initial tech support"
     ],
-    webExtra: {
-      id: "web-extra",
-      name: "Support & Redesign",
-      price: "From $99",
-      desc: "For existing websites — fixes, redesign or maintenance as needed.",
-      bullets: [
-        "Bug or error fixes",
-        "Fix broken images or links",
-        "Design improvements",
-        "Basic technical maintenance",
-      ],
-    },
+  },
+  {
+    id: "plan-seo",
+    name: "Pro   Plan",
+    price: "$600 one-time",
+    bullets: [
+      "Full site (up to 6 sections)",
+      "Local SEO optimization",
+      "Basic analytics",
+      "Live chat",
+      "1 year hosting and SSL",
+      "Modern & fast design",
+      "Priority tech support"
+    ],
+    popular: true,
+  },
+  {
+    id: "plan-ads",
+    name: "Premium Boost Plan",
+    price: "$800 one-time",
+    bullets: [
+      "Everything in Pro Plan",
+      "Advanced analytics (events, heatmaps)",
+      "Initial ads campaign (ad spend paid by client)",
+      "Push notifications",
+      "30-day automatic backups",
+      "Social media integration"
+    ],
+  },
+  {
+    id: "plan-enterprise",
+    name: "Enterprise Plan",
+    price: "Contact us",
+    bullets: [
+      "Custom web projects",
+      "Advanced integrations",
+      "Unique features",
+      "Mobile apps or portals",
+      "Fully tailored design",
+      "Get a custom quote"
+    ],
+  },
+],
+
+webExtra: {
+  id: "web-extra",
+  name: "Support & Redesign",
+  price: "From $50",
+  desc: "For existing websites — fixes, redesign or maintenance as needed.",
+  bullets: [
+    "Bug or error fixes",
+    "Fix broken images or links",
+    "Design improvements",
+    "Basic technical maintenance",
+  ],
+},
+
     appsTitle: "Want your own mobile app?",
     appsNote: "Clear plans — launch on Android & iOS",
     appsPlans: [
@@ -293,7 +367,7 @@ export default function LandingPage() {
   const t = useMemo(() => dict[lang], [lang]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", service: "" });
-
+const [showApps, setShowApps] = useState(false);
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const res = await fetch("/api/lead", {
@@ -395,11 +469,30 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Problemas comunes */}
+       {/* Problemas comunes + Beneficios combinados */}
+       
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="text-center text-2xl font-bold md:text-3xl mb-8">{t.problemsTitle}</h2>
-        <div className="grid gap-6 md:grid-cols-2">
-          {t.problems.map((p, i) => (
+        <h2 className="text-center text-2xl font-bold md:text-3xl mb-8">
+          {lang === "es" ? "¿Qué incluye nuestro servicio?" : "What's included?"}
+        </h2>
+        <div className="grid gap-6 md:grid-cols-3">
+          {[...(lang === "es"
+            ? [
+                "Hosting por 1 año incluido",
+                "Web rápida y optimizada para móvil",
+                "Formulario de contacto o WhatsApp",
+                "Perfil en Google Maps",
+                "SEO local básico",
+                "Soporte técnico inicial",
+              ]
+            : [
+                "1 year hosting included",
+                "Fast, mobile-optimized website",
+                "Contact form or WhatsApp integration",
+                "Google Maps profile",
+                "Basic local SEO",
+                "Initial technical support",
+              ])].map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -408,30 +501,12 @@ export default function LandingPage() {
               viewport={{ once: true }}
               className="rounded-2xl border border-slate-200 bg-white p-6 shadow hover:shadow-lg dark:border-slate-700 dark:bg-slate-900"
             >
-              <p className="text-lg font-medium text-slate-700 dark:text-slate-200">{p}</p>
+              <p className="text-slate-700 dark:text-slate-300">{item}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Beneficios */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="text-center text-2xl font-bold md:text-3xl">{t.benefitsTitle}</h2>
-        <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {t.benefits.map((b, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.2 }}
-              viewport={{ once: true }}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow hover:shadow-lg dark:border-slate-700 dark:bg-slate-900"
-            >
-              <p className="text-slate-700 dark:text-slate-300">{b}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
       {/* Web Pricing */}
       <section className="mx-auto max-w-6xl px-4 py-16">
@@ -481,55 +556,117 @@ export default function LandingPage() {
           ))}
         </div>
       </section>
+ 
+ 
+{!showApps && (
+  <div className="text-center mt-12 space-y-4">
+    <p className="text-lg font-medium text-slate-700 dark:text-slate-300">
+      {lang === "es"
+        ? "¿Buscas algo más?"
+        : "Looking for something else?"}
+    </p>
+    <button
+      onClick={() => setShowApps(true)}
+      className="inline-block rounded-xl bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700"
+    >
+      {lang === "es"
+        ? "Ver planes para apps móviles"
+        : "View mobile app plans"}
+    </button>
+  </div>
+)}
 
-      {/* Mobile Apps Pricing */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold md:text-3xl">{t.appsTitle}</h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">{t.appsNote}</p>
-        </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-4">
-          {[...t.appsPlans, t.appsExtra].map((plan, i) => (
-            <motion.div
-              key={plan.id || i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.2 }}
-              viewport={{ once: true }}
-              className={`relative rounded-2xl border p-6 shadow hover:shadow-xl transition dark:border-slate-700 dark:bg-slate-900 bg-white ${
-                plan.popular ? "border-blue-600 ring-2 ring-blue-600" : ""
-              }`}
-            >
-              {plan.popular && (
-                <span className="absolute -top-3 right-4 rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
-                  {lang === "es" ? "Popular" : "Popular"}
-                </span>
-              )}
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold">{plan.name}</h3>
-                <span className="text-sm text-slate-600 dark:text-slate-300">{plan.price}</span>
-              </div>
-              {plan.desc && (
-                <p className="mt-2 text-slate-600 dark:text-slate-400 text-sm">{plan.desc}</p>
-              )}
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-700 dark:text-slate-300">
-                {plan.bullets.map((x, j) => (
-                  <li key={j}>{x}</li>
-                ))}
-              </ul>
-              <button
-                onClick={() => {
-                  setForm((prev) => ({ ...prev, service: plan.id }));
-                  setShowForm(true);
-                }}
-                className="mt-4 w-full rounded-lg bg-blue-600 px-4 py-2 text-white font-semibold hover:bg-blue-700"
-              >
-                {lang === "es" ? "Obtener este servicio" : "Get this service"}
-              </button>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+
+
+ {/* Mobile Apps Pricing */}
+{showApps && (
+<section className="mx-auto max-w-6xl px-4 py-16"  id="apps-section">
+<div className="text-center">
+<h2 className="text-2xl font-bold md:text-3xl">{t.appsTitle}</h2>
+<p className="mt-2 text-slate-600 dark:text-slate-400">{t.appsNote}</p>
+</div>
+<div className="mt-10 grid gap-6 md:grid-cols-4">
+{[...t.appsPlans, t.appsExtra].map((plan, i) => (
+<motion.div
+key={plan.id || i}
+initial={{ opacity: 0, y: 20 }}
+whileInView={{ opacity: 1, y: 0 }}
+transition={{ duration: 0.5, delay: i * 0.2 }}
+viewport={{ once: true }}
+className={`relative rounded-2xl border p-6 shadow hover:shadow-xl transition dark:border-slate-700 dark:bg-slate-900 bg-white ${
+plan.popular ? "border-blue-600 ring-2 ring-blue-600" : ""
+}`}
+>
+{plan.popular && (
+<span className="absolute -top-3 right-4 rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
+{lang === "es" ? "Popular" : "Popular"}
+</span>
+)}
+<div className="flex items-center justify-between">
+<h3 className="text-xl font-semibold">{plan.name}</h3>
+<span className="text-sm text-slate-600 dark:text-slate-300">{plan.price}</span>
+</div>
+{plan.desc && (
+<p className="mt-2 text-slate-600 dark:text-slate-400 text-sm">{plan.desc}</p>
+)}
+<ul className="mt-4 list-disc space-y-2 pl-5 text-slate-700 dark:text-slate-300">
+{plan.bullets.map((x, j) => (
+<li key={j}>{x}</li>
+))}
+</ul>
+<button
+onClick={() => {
+setForm((prev) => ({ ...prev, service: plan.id }));
+setShowForm(true);
+}}
+className="mt-4 w-full rounded-lg bg-blue-600 px-4 py-2 text-white font-semibold hover:bg-blue-700"
+>
+{lang === "es" ? "Obtener este servicio" : "Get this service"}
+</button>
+</motion.div>
+))}
+</div>
+</section>
+)}
+
+  
+
+{/* Portfolio / Projects */}
+<section className="mx-auto max-w-6xl px-4 py-16">
+<h2 className="text-center text-2xl font-bold md:text-3xl">
+{lang === "es" ? "Proyectos recientes" : "Recent Projects"}
+</h2>
+<p className="mt-2 text-center text-slate-600 dark:text-slate-400">
+{lang === "es"
+? "Algunos ejemplos de lo que hemos hecho para otros clientes."
+: "A few examples of what we’ve built for other clients."}
+</p>
+
+
+<div className="mt-10 grid gap-6 md:grid-cols-3">
+{projects.map((proj, i) => (
+<motion.div
+key={i}
+initial={{ opacity: 0, y: 20 }}
+whileInView={{ opacity: 1, y: 0 }}
+transition={{ duration: 0.5, delay: i * 0.2 }}
+viewport={{ once: true }}
+className="rounded-2xl border border-slate-200 bg-white p-4 shadow hover:shadow-lg dark:border-slate-700 dark:bg-slate-900"
+>
+<img
+src={proj.src}
+alt={lang === "es" ? proj.titleEs : proj.titleEn}
+className="rounded-lg w-full object-cover"
+/>
+<h3 className="mt-4 text-lg font-semibold text-slate-800 dark:text-slate-200">
+{lang === "es" ? proj.titleEs : proj.titleEn}
+</h3>
+</motion.div>
+))}
+</div>
+</section>
+
+ 
 
       {showForm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
