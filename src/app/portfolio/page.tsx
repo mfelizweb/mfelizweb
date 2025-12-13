@@ -250,18 +250,23 @@ export default function PortfolioPage() {
     },
   ];
 
-  const featuredProjects = useMemo(
-    () => projects.map((p, i) => ({ ...p, __index: i })).filter((p: any) => p.featured),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  ) as (Project & { __index: number })[];
+  type IndexedProject = Project & { __index: number };
+  
+const featuredProjects = useMemo<IndexedProject[]>(
+  () =>
+    projects
+      .map((p, i) => ({ ...p, __index: i }))
+      .filter((p) => p.featured === true),
+  [projects]
+);
 
-  const restProjects = useMemo(
-    () => projects.map((p, i) => ({ ...p, __index: i })).filter((p: any) => !p.featured),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  ) as (Project & { __index: number })[];
-
+const restProjects = useMemo<IndexedProject[]>(
+  () =>
+    projects
+      .map((p, i) => ({ ...p, __index: i }))
+      .filter((p) => !p.featured),
+  [projects]
+);
   function setActiveImage(projectIndex: number, imageIndex: number) {
     setActiveImageByProject((prev) => ({ ...prev, [projectIndex]: imageIndex }));
   }
