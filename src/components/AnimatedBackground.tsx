@@ -1,140 +1,121 @@
 "use client";
-import { useEffect, useRef } from "react";
 
-let ctx!: CanvasRenderingContext2D;
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { OrbitControls, Instances, Instance, Environment } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { useRef, useEffect, useState } from "react";
+import { Group, MathUtils } from "three";
 
-export default function AnimatedBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+/* ============================
+   Scroll → Zoom de cámara
+============================ */
+function ScrollCamera() {
+  const { camera } = useThree();
+  const [scroll, setScroll] = useState(0);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    ctx = canvas.getContext("2d")!;
-    if (!ctx) throw new Error("Canvas context not found");
-
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    const particleCount = 90;
-    const particles: Particle[] = [];
-    const mouse = { x: width / 2, y: height / 2 };
-
-    class Particle {
-      x: number;
-      y: number;
-      baseRadius: number;
-      radius: number;
-      color: string;
-      velocityX: number;
-      velocityY: number;
-
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.baseRadius = Math.random() * 1.5 + 1;
-        this.radius = this.baseRadius;
-        this.color = "rgba(255,255,255,0.4)";
-        this.velocityX = (Math.random() - 0.5) * 0.4;
-        this.velocityY = (Math.random() - 0.5) * 0.4;
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.shadowColor = "#ffffff";
-        ctx.shadowBlur = 15;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      update() {
-        this.x += this.velocityX;
-        this.y += this.velocityY;
-
-        // Rebote
-        if (this.x <= 0 || this.x >= width) this.velocityX *= -1;
-        if (this.y <= 0 || this.y >= height) this.velocityY *= -1;
-
-        // Pulso
-        const pulse = Math.sin(Date.now() * 0.002 + this.x) * 0.3;
-        this.radius = this.baseRadius + pulse;
-
-        // Atracción al mouse
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
-          this.x += dx / dist;
-          this.y += dy / dist;
-        }
-
-        this.draw();
-      }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    function connectParticles() {
-      for (let a = 0; a < particles.length; a++) {
-        for (let b = a + 1; b < particles.length; b++) {
-          const dx = particles[a].x - particles[b].x;
-          const dy = particles[a].y - particles[b].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 90) {
-            const opacity = 1 - distance / 90;
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(255,255,255,${opacity * 0.25})`;
-            ctx.lineWidth = 1;
-            ctx.moveTo(particles[a].x, particles[a].y);
-            ctx.lineTo(particles[b].x, particles[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-      particles.forEach((p) => p.update());
-      connectParticles();
-      requestAnimationFrame(animate);
+    const onScroll = () => {
+      const maxScroll = window.innerHeight * 1.2;
+      const value = Math.min(window.scrollY / maxScroll, 1);
+      setScroll(value);
     };
 
-    animate();
-
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    };
-
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useFrame(() => {
+    // Zoom suave: 6 → 4
+    const targetZ = 6 - scroll * 2;
+    camera.position.z += (targetZ - camera.position.z) * 0.08;
+  });
+
+  return null;
+}
+
+/* ============================
+   Cubos flotantes
+============================ */
+function FloatingInstances() {
+  const groupRef = useRef<Group>(null);
+
+  useFrame((state, delta) => {
+    if (!groupRef.current) return;
+
+    groupRef.current.rotation.y += delta * 0.15;
+    groupRef.current.rotation.x =
+      Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
+  });
+
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 z-0 pointer-events-none"
-      style={{
-        filter: "blur(1px)",
-        background: "transparent",
-        transition: "filter 0.3s ease-out",
-      }}
-    />
+    <group ref={groupRef}>
+      <Instances limit={100} castShadow receiveShadow>
+        <boxGeometry args={[0.3, 0.3, 0.3]} />
+        <meshStandardMaterial
+          color="#ffff"
+          metalness={0.9}
+          roughness={0.05}
+        />
+
+        {Array.from({ length: 100 }).map((_, i) => (
+          <Instance
+            key={i}
+            position={[
+              MathUtils.randFloatSpread(6),
+              MathUtils.randFloatSpread(6),
+              MathUtils.randFloatSpread(6),
+            ]}
+            rotation={[
+              Math.random() * Math.PI,
+              Math.random() * Math.PI,
+              Math.random() * Math.PI,
+            ]}
+            scale={Math.random() * 0.5 + 0.3}
+          />
+        ))}
+      </Instances>
+    </group>
+  );
+}
+
+/* ============================
+   Componente principal
+============================ */
+export default function AnimatedBackground() {
+  return (
+    <><div className="absolute inset-0 bg-white/40 backdrop-blur-sm" /><div className="absolute inset-0 z-0">
+      <Canvas
+        dpr={[1, 2]}
+        camera={{ position: [0, 0, 6], fov: 50 }}
+      >
+        {/* Fondo */}
+        <color attach="background" args={["#ffffff"]} />
+
+        {/* Luces */}
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[5, 5, 5]} intensity={1.2} />
+
+        {/* Escena */}
+        <FloatingInstances />
+        <ScrollCamera />
+
+        {/* Controles (sin interferir con scroll) */}
+        <OrbitControls
+          enableZoom={false}
+          enablePan={false}
+          enableRotate={false} />
+
+        {/* Postprocesado */}
+        <EffectComposer>
+          <Bloom
+            luminanceThreshold={0.4}
+            luminanceSmoothing={0.8}
+            intensity={1.2} />
+        </EffectComposer>
+
+        {/* HDRI */}
+        <Environment preset="sunset" />
+      </Canvas>
+    </div></>
   );
 }
