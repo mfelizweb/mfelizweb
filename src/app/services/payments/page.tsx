@@ -10,22 +10,28 @@ export default function PaymentsServicePage() {
     if (typeof navigator !== "undefined") {
       setLang(navigator.language.startsWith("es") ? "es" : "en");
     }
-    // animate counter
+
     let frame: number;
-    let start = 0;
     const target = 9847;
     const duration = 2000;
     const startTime = performance.now();
+
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1);
       const ease = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(ease * target));
       if (progress < 1) frame = requestAnimationFrame(tick);
     };
-    const timeout = setTimeout(() => { frame = requestAnimationFrame(tick); }, 800);
-    return () => { clearTimeout(timeout); cancelAnimationFrame(frame); };
-  }, []);
 
+    const timeout = setTimeout(() => {
+      frame = requestAnimationFrame(tick);
+    }, 800);
+
+    return () => {
+      clearTimeout(timeout);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
   const texts = {
     es: {
       eyebrow: "Infraestructura de Pagos",
