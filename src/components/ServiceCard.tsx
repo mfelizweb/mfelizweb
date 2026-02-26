@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
 
@@ -32,21 +33,58 @@ export default function ServiceCard({
     <Link
       href={href}
       aria-label={title[lang]}
-      className="group flex flex-col items-start gap-3 rounded-2xl border border-white/10 bg-white/50 dark:bg-white/5 p-6 transition hover:shadow-xl hover:border-emerald-400/30"
+      className="group relative flex flex-col gap-4 rounded-2xl
+                 border border-slate-100 bg-slate-50
+                 p-7 overflow-hidden
+                 transition duration-300
+                 hover:border-indigo-200 hover:bg-white hover:shadow-xl hover:-translate-y-1"
     >
-      {icon && <div className="">{icon}</div>}
+      {/* Accent line top */}
+      <div
+        className="absolute top-0 left-0 h-[2px] w-full
+                   bg-gradient-to-r from-indigo-500 to-violet-500
+                   scale-x-0 group-hover:scale-x-100
+                   transition-transform duration-300 origin-left"
+      />
 
-      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-        {title[lang]}
-      </h3>
+      {/* Icon */}
+      {icon && (
+        <div className="w-11 h-11 rounded-xl bg-white border border-slate-100 shadow-sm
+                        flex items-center justify-center
+                        group-hover:border-indigo-100 transition">
+          {icon}
+        </div>
+      )}
 
-      <p className="text-gray-700 dark:text-gray-300 text-sm">
-        {description[lang]}
-      </p>
-
-      <div className="mt-auto text-sm text-gray-500 dark:text-gray-400 opacity-80 group-hover:opacity-100 transition">
-        {lang === "es" ? "Más info →" : "Learn more →"}
+      {/* Text */}
+      <div className="flex-1">
+        <h3 className="text-base font-bold text-slate-900 leading-snug">
+          {title[lang]}
+        </h3>
+        <p className="mt-2 text-sm text-slate-500 leading-relaxed">
+          {description[lang]}
+        </p>
       </div>
+
+      {/* Footer */}
+      <div className="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+        <span className="text-xs font-semibold text-indigo-500 group-hover:text-indigo-600 transition">
+          {lang === "es" ? "Ver más" : "Learn more"}
+        </span>
+        <span
+          className="text-slate-300 text-sm group-hover:text-indigo-400
+                     transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-0.5 inline-block"
+        >
+          ↗
+        </span>
+      </div>
+
+      {/* Badge (optional) */}
+      {badge && (
+        <div className="absolute top-4 right-4">
+          {badge}
+        </div>
+      )}
     </Link>
   );
 }

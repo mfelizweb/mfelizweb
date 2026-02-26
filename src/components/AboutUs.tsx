@@ -4,41 +4,63 @@ import { useEffect, useState } from "react";
 
 const texts = {
   en: {
-    title: "About Us",
+    label: "About us",
+    title: "Small team.",
+    titleAccent: "Big output.",
     paragraph:
-      "We’re a bilingual team focused on building modern digital products. From mobile applications to scalable web platforms, we design technology that helps businesses grow with confidence.",
+      "We're a bilingual studio based in New York, obsessed with clean code and conversion-focused design. We build web platforms, mobile apps, and digital tools for startups and local businesses that want to grow.",
     blocks: [
       {
+        icon: "⚡",
         title: "Innovation",
-        desc: "We transform ideas into scalable, elegant solutions using modern technologies.",
+        desc: "We turn ideas into elegant, scalable solutions using modern technologies like React Native, Next.js, and AI.",
       },
       {
+        icon: "🤝",
         title: "Collaboration",
-        desc: "We work closely with our clients at every stage — from strategy to launch and beyond.",
+        desc: "We work closely with clients at every step — from strategy and design to launch and ongoing support.",
       },
       {
+        icon: "📈",
         title: "Growth",
-        desc: "We design digital systems that evolve with your business and scale without friction.",
+        desc: "We build systems that evolve with your business, designed to scale without friction from day one.",
       },
+    ],
+    stats: [
+      { number: "40+", label: "Projects delivered" },
+      { number: "5★", label: "Client satisfaction" },
+      { number: "2", label: "Languages" },
+      { number: "∞", label: "Support included" },
     ],
   },
   es: {
-    title: "Sobre Nosotros",
+    label: "Sobre nosotros",
+    title: "Equipo pequeño.",
+    titleAccent: "Gran resultado.",
     paragraph:
-      "Somos un equipo bilingüe enfocado en construir productos digitales modernos. Desde aplicaciones móviles hasta plataformas web escalables, diseñamos tecnología que impulsa el crecimiento de los negocios.",
+      "Somos un estudio bilingüe en Nueva York, enfocados en código limpio y diseño que convierte. Construimos plataformas web, apps móviles y herramientas digitales para startups y negocios que quieren crecer.",
     blocks: [
       {
+        icon: "⚡",
         title: "Innovación",
-        desc: "Convertimos ideas en soluciones elegantes y escalables usando tecnología moderna.",
+        desc: "Convertimos ideas en soluciones elegantes y escalables usando React Native, Next.js e IA.",
       },
       {
+        icon: "🤝",
         title: "Colaboración",
-        desc: "Trabajamos junto a nuestros clientes en cada etapa — de la estrategia al lanzamiento y más allá.",
+        desc: "Trabajamos con nuestros clientes en cada etapa — de la estrategia al lanzamiento y más allá.",
       },
       {
+        icon: "📈",
         title: "Crecimiento",
-        desc: "Creamos sistemas digitales que evolucionan con tu negocio sin fricción.",
+        desc: "Creamos sistemas que evolucionan con tu negocio, diseñados para escalar sin fricción desde el día uno.",
       },
+    ],
+    stats: [
+      { number: "40+", label: "Proyectos entregados" },
+      { number: "5★", label: "Satisfacción del cliente" },
+      { number: "2", label: "Idiomas" },
+      { number: "∞", label: "Soporte incluido" },
     ],
   },
 };
@@ -55,67 +77,66 @@ export default function AboutUs() {
   const t = texts[lang];
 
   return (
-    <section
-      id="about"
-      className="relative bg-white text-slate-900
-                 px-6 sm:px-10 lg:px-20
-                 py-24 overflow-hidden"
-    >
-      {/* Contenedor principal */}
-      <div className="max-w-6xl mx-auto text-center">
-        {/* Título */}
-        <h2
-          className="text-4xl sm:text-5xl md:text-6xl
-                     font-semibold tracking-tight"
-        >
-          {t.title}
-        </h2>
+    <section id="about" className="bg-white px-6 sm:px-10 lg:px-20 py-28 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
 
-        {/* Descripción */}
-        <p
-          className="mt-6 max-w-3xl mx-auto
-                     text-lg text-slate-600 leading-relaxed"
-        >
-          {t.paragraph}
-        </p>
+        {/* Top row: label + heading + paragraph */}
+        <div className="grid lg:grid-cols-2 gap-12 items-end mb-20">
 
-        {/* Bloques */}
-        <div
-          className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6"
-        >
+          {/* Left */}
+          <div>
+            <span className="text-xs font-semibold tracking-widest uppercase text-indigo-500 mb-4 block">
+              {t.label}
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+              {t.title}{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-500">
+                {t.titleAccent}
+              </span>
+            </h2>
+          </div>
+
+          {/* Right */}
+          <p className="text-slate-500 text-lg leading-relaxed font-normal lg:pt-6">
+            {t.paragraph}
+          </p>
+        </div>
+
+        {/* Stats row */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-100 rounded-2xl overflow-hidden mb-20 border border-slate-100">
+          {t.stats.map((s, i) => (
+            <div key={i} className="bg-white px-8 py-8 text-center group hover:bg-slate-50 transition">
+              <div className="text-3xl font-extrabold text-slate-900 tracking-tight">{s.number}</div>
+              <div className="text-xs text-slate-400 mt-1 font-medium uppercase tracking-wide">{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Blocks */}
+        <div className="grid sm:grid-cols-3 gap-6">
           {t.blocks.map((block, i) => (
             <div
               key={i}
-              className="group relative
-                         rounded-2xl
-                         border border-slate-200/60
-                         bg-white
-                         p-8 text-left
-                         shadow-sm
-                         transition
-                         hover:shadow-xl
-                         hover:-translate-y-1"
+              className="group relative rounded-2xl border border-slate-100 bg-slate-50 p-8 text-left
+                         transition duration-300 hover:border-indigo-200 hover:bg-white hover:shadow-lg hover:-translate-y-1"
             >
-              {/* Línea decorativa */}
-              <div
-                className="absolute top-0 left-0 h-1 w-full
-                           rounded-t-2xl
-                           bg-gradient-to-r
-                           from-indigo-500 via-purple-500 to-indigo-500
-                           opacity-0 group-hover:opacity-100
-                           transition"
-              />
+              {/* Top accent line on hover */}
+              <div className="absolute top-0 left-0 h-[2px] w-full rounded-t-2xl
+                              bg-gradient-to-r from-indigo-500 to-violet-500
+                              scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
-              <h3 className="text-xl font-semibold text-slate-900">
+              <div className="text-2xl mb-5">{block.icon}</div>
+
+              <h3 className="text-base font-bold text-slate-900 mb-2">
                 {block.title}
               </h3>
-
-              <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-500 leading-relaxed">
                 {block.desc}
               </p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

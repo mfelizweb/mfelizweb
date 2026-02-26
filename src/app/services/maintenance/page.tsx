@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ShieldCheckIcon } from "@heroicons/react/24/solid";
+import { ShieldCheckIcon, CheckCircleIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export default function MaintenanceServicePage() {
   const [lang, setLang] = useState<"es" | "en">("en");
@@ -13,72 +13,90 @@ export default function MaintenanceServicePage() {
 
   const texts = {
     es: {
+      tag: "Soporte Premium",
       title: "Mantenimiento & Soporte",
-      subtitle:
-        "Nos encargamos de que tu página o aplicación funcione siempre sin problemas, mientras tú te concentras en tu negocio.",
+      subtitle: "Delegue la complejidad técnica. Nos aseguramos de que su infraestructura digital sea resiliente, rápida y esté siempre actualizada.",
       items: [
-        "Tu web siempre segura y funcionando sin interrupciones",
-        "Atención rápida cuando algo no funciona",
-        "Mejoras constantes para mantener todo actualizado",
-        "Tranquilidad de saber que tu proyecto está en buenas manos",
+        { title: "Seguridad Proactiva", desc: "Monitoreo 24/7 y parches de seguridad inmediatos." },
+        { title: "Soporte Prioritario", desc: "Resolución crítica de incidentes en tiempo récord." },
+        { title: "Evolución Continua", desc: "Actualizaciones de dependencias y optimización de performance." },
+        { title: "Respaldo Total", desc: "Backups automatizados y recuperación ante desastres." },
       ],
-      cta: "Solicita una consulta",
+      cta: "Empezar ahora",
     },
     en: {
+      tag: "Premium Support",
       title: "Maintenance & Support",
-      subtitle:
-        "We make sure your website or app always runs smoothly, so you can focus on growing your business.",
+      subtitle: "Offload the technical complexity. We ensure your digital infrastructure is resilient, fast, and always up to date.",
       items: [
-        "Your site always secure and running without interruptions",
-        "Quick response when something goes wrong",
-        "Ongoing improvements to keep everything up to date",
-        "Peace of mind knowing your project is in good hands",
+        { title: "Proactive Security", desc: "24/7 monitoring and immediate security patching." },
+        { title: "Priority Support", desc: "Critical incident resolution in record time." },
+        { title: "Continuous Evolution", desc: "Dependency updates and performance optimization." },
+        { title: "Full Backup", desc: "Automated backups and disaster recovery." },
       ],
-      cta: "Request a Consultation",
+      cta: "Get Started",
     },
   };
 
   const t = texts[lang];
 
   return (
-    <section
-      className="mx-auto max-w-3xl px-6 py-20 text-center"
-      aria-label={t.title}
-    >
-      {/* Icono */}
-      <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10">
-        <ShieldCheckIcon className="h-8 w-8 text-emerald-500" />
+    <section className="relative mx-auto max-w-5xl px-6 py-24 sm:py-32" aria-label={t.title}>
+      {/* Header con Badge Moderno */}
+      <div className="flex flex-col items-center text-center mb-16">
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-6 border border-emerald-500/20">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          {t.tag}
+        </span>
+
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-gray-900 dark:text-white mb-6">
+          {t.title.split('&')[0]} <span className="text-emerald-500">&</span> {t.title.split('&')[1]}
+        </h1>
+
+        <p className="max-w-2xl text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+          {t.subtitle}
+        </p>
       </div>
 
-      {/* Título + subtítulo */}
-      <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-        {t.title}
-      </h1>
-      <p className="mt-3 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-        {t.subtitle}
-      </p>
-
-      {/* Lista de beneficios */}
-      <ul className="mt-10 space-y-4 text-base text-gray-700 dark:text-gray-200 text-left max-w-lg mx-auto">
+      {/* Grid de Beneficios - Estilo Modern Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {t.items.map((item, i) => (
-          <li
+          <div
             key={i}
-            className="flex items-start gap-3 bg-white/40 dark:bg-white/5 p-4 rounded-xl shadow-sm hover:shadow-md transition"
+            className="group relative p-8 rounded-3xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/[0.02] backdrop-blur-sm hover:border-emerald-500/50 transition-all duration-300"
           >
-            <span className="mt-1 h-3 w-3 rounded-full bg-emerald-400 shrink-0" />
-            {item}
-          </li>
+            <div className="flex items-center gap-4 mb-3">
+              <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 group-hover:scale-110 transition-transform">
+                <CheckCircleIcon className="h-6 w-6" />
+              </div>
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white leading-none">
+                {item.title}
+              </h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed ml-12">
+              {item.desc}
+            </p>
+          </div>
         ))}
-      </ul>
+      </div>
 
-      {/* CTA */}
-      <div className="mt-12">
+      {/* CTA Sección */}
+      <div className="mt-16 text-center">
         <a
           href="/estimate"
-          className="inline-block rounded-lg bg-emerald-500 px-6 py-3 text-white font-semibold shadow-md hover:bg-emerald-400 transition"
+          className="group inline-flex items-center gap-2 rounded-full bg-gray-900 dark:bg-white px-8 py-4 text-white dark:text-gray-900 font-bold shadow-xl hover:scale-105 transition-all active:scale-95"
         >
           {t.cta}
+          <ArrowRightIcon className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
         </a>
+
+        <p className="mt-6 text-sm text-gray-500 dark:text-gray-500 flex items-center justify-center gap-2">
+          <ShieldCheckIcon className="h-4 w-4" />
+          Infraestructura certificada y segura
+        </p>
       </div>
     </section>
   );
