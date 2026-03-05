@@ -484,6 +484,7 @@ function ProjectPlannerInner() {
         </div>
       )}
     </div>
+  );
 }
 
 // Wrap in Suspense so pages using this component can be statically pre-rendered.
