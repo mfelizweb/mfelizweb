@@ -1,4 +1,7 @@
 import { Suspense } from "react";
+
+// This page uses useSearchParams() inside ProjectPlanner → must be dynamic
+export const dynamic = "force-dynamic";
 import ChatEstimator from "@/components/ProjectPlanner";
 
 function PlannerFallback() {
