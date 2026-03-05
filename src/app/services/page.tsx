@@ -1,225 +1,185 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
-import ServiceCard from "@/components/ServiceCard";
-import {
-  Globe,
-  Smartphone,
-  Contact,
-  CreditCard,
-  Wrench,
-  Bot,
-  ArrowRight,
-  Sparkles,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+type Lang = "es" | "en";
+
+const services = [
+  {
+    key: "mobile", emoji: "📱",
+    title: { es: "Apps Móviles", en: "Mobile Apps" },
+    desc: { es: "iOS & Android nativas con React Native.", en: "Native iOS & Android with React Native." },
+    badge: { es: "Más popular", en: "Most popular" },
+    href: "/services/mobile",
+    estHref: "/estimate?service=mobile",
+    color: "from-blue-500 to-cyan-400",
+  },
+  {
+    key: "web", emoji: "🌐",
+    title: { es: "Diseño Web", en: "Web Design" },
+    desc: { es: "Plataformas Next.js ultrarrápidas y SEO.", en: "Blazing fast Next.js platforms & SEO." },
+    href: "/services/web",
+    estHref: "/estimate?service=web",
+    color: "from-indigo-500 to-blue-400",
+  },
+  {
+    key: "ai", emoji: "🤖",
+    title: { es: "IA & Automatización", en: "AI & Automation" },
+    desc: { es: "Agentes autónomos, chatbots y flujos inteligentes.", en: "Autonomous agents, chatbots & intelligent flows." },
+    badge: { es: "Nuevo · 2026", en: "New · 2026" },
+    href: "/services/ai",
+    estHref: "/estimate",
+    color: "from-violet-500 to-indigo-400",
+  },
+  {
+    key: "nfc", emoji: "📶",
+    title: { es: "Tarjetas NFC", en: "NFC Smart Cards" },
+    desc: { es: "Networking inteligente con analíticas.", en: "Smart networking & real-time analytics." },
+    href: "/services/nfc",
+    estHref: "/estimate?service=nfc",
+    color: "from-cyan-500 to-teal-400",
+  },
+  {
+    key: "payments", emoji: "💳",
+    title: { es: "Pagos Online", en: "Payments" },
+    desc: { es: "Stripe/Square: checkout & suscripciones.", en: "Stripe/Square: checkout & subscriptions." },
+    href: "/services/payments",
+    estHref: "/estimate?service=payments",
+    color: "from-amber-500 to-orange-400",
+  },
+  {
+    key: "maintenance", emoji: "🛠️",
+    title: { es: "Mantenimiento", en: "Maintenance" },
+    desc: { es: "Monitoreo 24/7, seguridad y soporte mensual.", en: "24/7 monitoring, security & monthly support." },
+    href: "/services/maintenance",
+    estHref: "/estimate?service=maintenance",
+    color: "from-emerald-500 to-teal-400",
+  },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.5, ease: "easeOut" as const, delay: i * 0.07 },
+  }),
+};
 
 export default function ServicesPage() {
-  const [lang, setLang] = useState<"es" | "en">("en");
-  const [mounted, setMounted] = useState(false);
+  const [lang, setLang] = useState<Lang>("en");
 
   useEffect(() => {
-    if (typeof navigator !== "undefined") {
-      setLang(navigator.language.startsWith("es") ? "es" : "en");
-    }
-    setMounted(true);
+    if (typeof navigator !== "undefined")
+      setLang(navigator.language.toLowerCase().startsWith("es") ? "es" : "en");
   }, []);
 
-  const services = [
-    {
-      icon: Globe,
-      color: "indigo",
-      gradient: "from-indigo-500 to-violet-500",
-      bg: "bg-indigo-50 dark:bg-indigo-950/30",
-      border: "border-indigo-100 dark:border-indigo-900/40",
-      title: { es: "Diseño y Desarrollo Web", en: "Web Design & Development" },
-      description: {
-        es: "Sitios modernos, rápidos y optimizados para atraer clientes.",
-        en: "Modern, fast, and optimized websites to attract and convert clients.",
-      },
-      href: "/services/web",
-    },
-    {
-      icon: Smartphone,
-      color: "sky",
-      gradient: "from-sky-500 to-cyan-500",
-      bg: "bg-sky-50 dark:bg-sky-950/30",
-      border: "border-sky-100 dark:border-sky-900/40",
-      title: { es: "Aplicaciones Móviles", en: "Mobile Apps" },
-      description: {
-        es: "Apps profesionales para iOS y Android, fáciles de usar y seguras.",
-        en: "Professional iOS & Android apps — intuitive, fast, and secure.",
-      },
-      href: "/services/mobile",
-    },
-    {
-      icon: Contact,
-      color: "emerald",
-      gradient: "from-emerald-500 to-teal-500",
-      bg: "bg-emerald-50 dark:bg-emerald-950/30",
-      border: "border-emerald-100 dark:border-emerald-900/40",
-      title: { es: "Tarjetas NFC Inteligentes", en: "NFC Smart Cards" },
-      description: {
-        es: "Tarjetas de contacto inteligentes con QR y estadísticas.",
-        en: "Smart contact cards with QR codes and real-time analytics.",
-      },
-      href: "/services/nfc",
-    },
-    {
-      icon: CreditCard,
-      color: "violet",
-      gradient: "from-violet-500 to-purple-500",
-      bg: "bg-violet-50 dark:bg-violet-950/30",
-      border: "border-violet-100 dark:border-violet-900/40",
-      title: { es: "Pagos en Línea", en: "E-Payments Integration" },
-      description: {
-        es: "Cobros fáciles y seguros: enlaces, suscripciones y checkout.",
-        en: "Seamless payments: links, subscriptions, and custom checkout.",
-      },
-      href: "/services/payments",
-    },
-    {
-      icon: Wrench,
-      color: "amber",
-      gradient: "from-amber-500 to-orange-500",
-      bg: "bg-amber-50 dark:bg-amber-950/30",
-      border: "border-amber-100 dark:border-amber-900/40",
-      title: { es: "Mantenimiento & Soporte", en: "Maintenance & Support" },
-      description: {
-        es: "Planes mensuales para mantener tu web siempre estable y segura.",
-        en: "Monthly plans to keep your site always stable, fast, and secure.",
-      },
-      href: "/services/maintenance",
-    },
-  ];
-
-  const t = {
-    title: lang === "es" ? "Servicios" : "Services",
-    eyebrow: lang === "es" ? "Lo que construimos" : "What we build",
-    subtitle:
-      lang === "es"
-        ? "Soluciones modulares — elige solo lo que tu negocio necesita."
-        : "Modular solutions — pick exactly what your business needs.",
-    cta: lang === "es" ? "Ver más" : "Learn more",
-    ai: {
-      badge: lang === "es" ? "Nuevo · 2026" : "New · 2026",
-      title: lang === "es" ? "Asistentes de IA & Chatbots" : "AI Assistants & Chatbots",
-      subtitle:
-        lang === "es"
-          ? "Chatbots inteligentes que responden preguntas, atienden clientes 24/7 y capturan prospectos para tu negocio."
-          : "Smart chatbots that answer questions, serve customers 24/7, and capture leads for your business.",
-      cta: lang === "es" ? "Explorar IA" : "Explore AI",
-    },
-  };
+  const L = (es: string, en: string) => lang === "es" ? es : en;
 
   return (
-    <section className="relative mx-auto max-w-7xl px-6 py-24 overflow-hidden">
+    <main className="relative bg-white min-h-screen overflow-hidden">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_60%,transparent_100%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse,rgba(37,99,235,0.06)_0%,transparent_70%)] pointer-events-none" />
 
-      {/* ── Ambient background blobs ── */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-indigo-200/30 dark:bg-indigo-900/20 blur-[120px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-violet-200/30 dark:bg-violet-900/20 blur-[120px]"
-      />
+      <section className="relative max-w-7xl mx-auto px-6 py-28">
 
-      {/* ── Header ── */}
-      <div className={`relative transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-4">
-          <Sparkles className="w-3 h-3" />
-          {t.eyebrow}
-        </span>
-
-        <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1]">
-          {t.title}
-        </h1>
-        <p className="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-xl">
-          {t.subtitle}
-        </p>
-      </div>
-
-      {/* ── Services grid ── */}
-      <div className="relative mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {services.map((service, i) => {
-          const Icon = service.icon;
-          return (
-            <a
-              key={i}
-              href={service.href}
-              style={{ transitionDelay: `${i * 60}ms` }}
-              className={`
-                group relative flex flex-col gap-4 rounded-2xl border p-6
-                ${service.bg} ${service.border}
-                hover:shadow-xl hover:-translate-y-1
-                transition-all duration-300 ease-out
-                ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
-              `}
-            >
-              {/* Icon container */}
-              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shadow-sm`}>
-                <Icon className="w-5 h-5 text-white" />
-              </div>
-
-              <div className="flex-1">
-                <h3 className="text-base font-semibold text-gray-900 dark:text-white">
-                  {service.title[lang]}
-                </h3>
-                <p className="mt-1.5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                  {service.description[lang]}
-                </p>
-              </div>
-
-              <div className={`flex items-center gap-1 text-sm font-medium bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`}>
-                {t.cta}
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1 text-gray-400 group-hover:text-current" />
-              </div>
-            </a>
-          );
-        })}
-      </div>
-
-      {/* ── AI Feature Banner ── */}
-      <div
-        id="ai"
-        className={`
-          relative mt-10 rounded-3xl overflow-hidden border border-blue-100 dark:border-blue-900/40
-          bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50
-          dark:from-blue-950/40 dark:via-indigo-950/40 dark:to-violet-950/40
-          p-8 sm:p-10
-          transition-all duration-700 delay-300
-          ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
-        `}
-      >
-        {/* Glow */}
-        <div aria-hidden className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-full blur-3xl" />
-
-        <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
-          {/* Icon */}
-          <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/25">
-            <Bot className="w-7 h-7 text-white" />
-          </div>
-
-          <div className="flex-1">
-            <span className="inline-block rounded-full bg-blue-100 dark:bg-blue-900/50 px-2.5 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">
-              {t.ai.badge}
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="max-w-3xl mb-20"
+        >
+          <span className="inline-block py-1.5 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-[10px] font-black tracking-[0.2em] uppercase mb-6 shadow-sm">
+            {L("Lo que construimos", "What we build")}
+          </span>
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-none text-slate-900 mb-6">
+            {L("Servicios", "Services")}<br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">
+              {L("& Soluciones.", "& Solutions.")}
             </span>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              {t.ai.title}
-            </h2>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 max-w-lg">
-              {t.ai.subtitle}
-            </p>
-          </div>
+          </h1>
+          <p className="text-xl text-slate-500 leading-relaxed font-light max-w-xl">
+            {L(
+              "Soluciones modulares — elige exactamente lo que tu negocio necesita.",
+              "Modular solutions — pick exactly what your business needs."
+            )}
+          </p>
+        </motion.div>
 
-          <a
-            href="/services/ai"
-            className="flex-shrink-0 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-200 hover:-translate-y-0.5"
-          >
-            {t.ai.cta}
-            <ArrowRight className="w-4 h-4" />
-          </a>
+        {/* Services grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
+          {services.map((s, i) => (
+            <motion.div
+              key={s.key}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
+            >
+              <Link
+                href={s.href}
+                className="group relative flex flex-col rounded-3xl border border-slate-200 bg-white p-8 overflow-hidden
+                           hover:border-blue-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full"
+              >
+                {/* Top gradient line */}
+                <div className={`absolute top-0 left-0 h-[3px] w-full bg-gradient-to-r ${s.color} scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
+
+                <div className="flex items-start justify-between mb-6">
+                  <div className="text-3xl">{s.emoji}</div>
+                  {s.badge && (
+                    <span className="inline-block py-1 px-3 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[9px] font-black tracking-widest uppercase">
+                      {s.badge[lang]}
+                    </span>
+                  )}
+                </div>
+
+                <h2 className="text-xl font-black uppercase tracking-tight text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">
+                  {s.title[lang]}
+                </h2>
+                <p className="text-sm text-slate-500 leading-relaxed flex-1">{s.desc[lang]}</p>
+
+                <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+                    {L("Ver servicio", "See service")}
+                  </span>
+                  <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:border-blue-600 group-hover:text-white transition-colors">
+                    <svg className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
-      </div>
-    </section>
+
+        {/* Bottom CTA */}
+        <motion.div
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          className="relative rounded-[2.5rem] border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-8 py-20 sm:px-20 text-center overflow-hidden shadow-xl shadow-blue-900/5"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.05)_0%,transparent_70%)]" />
+          <div className="relative z-10">
+            <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-tighter text-slate-900 mb-5">
+              {L("¿No sabes por dónde empezar?", "Not sure where to start?")}
+            </h2>
+            <p className="text-slate-500 mb-10 max-w-lg mx-auto text-lg">
+              {L(
+                "Usa nuestro planificador de proyectos y te ayudamos a definir el scope ideal.",
+                "Use our project planner and we'll help you define the perfect scope."
+              )}
+            </p>
+            <Link
+              href="/estimate"
+              className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-10 py-4 text-sm font-black uppercase tracking-widest text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 hover:scale-105 transition-all"
+            >
+              {L("Planificar mi proyecto →", "Plan my project →")}
+            </Link>
+          </div>
+        </motion.div>
+
+      </section>
+    </main>
   );
 }

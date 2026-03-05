@@ -1,139 +1,170 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import AnimatedBackground from "@/components/AnimatedBackground";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const texts = {
-  es: {
-    badge: "Disponible para nuevos proyectos",
-    title1: "Diseñamos y construimos",
-    title2: "productos digitales",
-    subtitle:
-      "Plataformas web, apps móviles y automatización para startups y empresas en crecimiento. A medida, escalable, listo para producción.",
-    bullets: [
-      "Web apps y mobile apps",
-      "Automatización de procesos",
-      "Soluciones escalables y seguras",
-    ],
-    ctaEstimate: "Iniciar un proyecto",
-    ctaPortfolio: "Ver proyectos",
-    ctaWhatsApp: "Hablar por WhatsApp",
-  },
-  en: {
-    badge: "Available for new projects",
-    title1: "We design and build",
-    title2: "digital products",
-    subtitle:
-      "Web platforms, mobile apps, and automation for startups and growing businesses. Custom-built, scalable, and production-ready.",
-    bullets: [
-      "Web platforms & mobile apps",
-      "Business process automation",
-      "Scalable, secure solutions",
-    ],
-    ctaEstimate: "Start a project",
-    ctaPortfolio: "See portfolio",
-    ctaWhatsApp: "Message on WhatsApp",
-  },
-};
+const words = [
+  { text: "CONSTRUIMOS", color: "text-slate-900" },
+  { text: "EL FUTURO", color: "text-blue-600" },
+];
+const wordsEn = [
+  { text: "WE BUILD THE", color: "text-slate-900" },
+  { text: "FUTURE", color: "text-blue-600" },
+];
 
 export default function Hero() {
-  const [lang, setLang] = useState<"es" | "en">("en");
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const subRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const ctasRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof navigator !== "undefined") {
-      setLang(navigator.language?.toLowerCase().startsWith("es") ? "es" : "en");
-    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      // ── Staggered char reveal on load ──
+      const chars = document.querySelectorAll(".hero-char");
+      gsap.fromTo(
+        chars,
+        { y: 120, skewY: 8, opacity: 0 },
+        {
+          y: 0,
+          skewY: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.04,
+          ease: "power4.out",
+          delay: 0.2,
+        }
+      );
+
+      // Badge + sub + ctas fade up
+      gsap.fromTo(
+        [badgeRef.current, subRef.current, ctasRef.current],
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.12,
+          ease: "power3.out",
+          delay: 0.8,
+        }
+      );
+
+      // ── Gravity parallax on scroll ──
+      gsap.to(titleRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+        y: 180,
+        scale: 0.92,
+        opacity: 0,
+        ease: "none",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const t = texts[lang];
+  const isEs =
+    typeof navigator !== "undefined" &&
+    navigator.language.toLowerCase().startsWith("es");
+
+  const displayWords = isEs ? words : wordsEn;
+  const subtitle = isEs
+    ? "Plataformas web, apps móviles y automación con IA. Diseño premium, escalabilidad total."
+    : "Web platforms, mobile apps and AI automation. Premium design, total scalability.";
+  const badge = isEs ? "Disponible para nuevos proyectos" : "Available for new projects";
+  const btnPrimary = isEs ? "Inicia tu proyecto" : "Start your project";
+  const btnSec = isEs ? "Ver portfolio" : "See portfolio";
+  const footerLeft = isEs ? "Estudio Digital ©2026" : "Digital Studio ©2026";
+  const footerRight = isEs
+    ? "Escalando proyectos al nivel exponencial."
+    : "Scaling projects to the exponential level.";
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-white text-slate-900">
+    <section
+      ref={sectionRef}
+      className="relative min-h-[110vh] flex flex-col items-center justify-center bg-white overflow-hidden px-6 pt-28 pb-20"
+    >
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,#000_60%,transparent_100%)] pointer-events-none" />
 
-      {/* Fondo animado */}
-      <AnimatedBackground />
+      {/* Orb */}
+      <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.07)_0%,transparent_70%)] blur-3xl pointer-events-none" />
 
-      {/* Orb decorativo */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-[-200px] left-1/2 -translate-x-1/2
-                   w-[700px] h-[700px] rounded-full
-                   bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.10)_0%,transparent_65%)]"
-      />
-
-      {/* Contenido */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 py-32">
+      <div ref={titleRef} className="relative z-10 w-full max-w-[1400px] mx-auto">
 
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-medium text-slate-600 shadow-sm mb-10">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          {t.badge}
+        <div ref={badgeRef} className="flex justify-center mb-10 opacity-0">
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-5 py-2 text-xs font-semibold text-blue-700 shadow-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+            </span>
+            {badge}
+          </div>
         </div>
 
-        {/* Título */}
-        <h1 className="max-w-4xl text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.05] tracking-tight">
-          <span className="block text-slate-900">{t.title1}</span>
-          <span className="block bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-500 mt-1">
-            {t.title2}
-          </span>
+        {/* Oversized masked title */}
+        <h1 className="text-center leading-none tracking-tighter text-[15vw] sm:text-[12vw] lg:text-[10vw] font-black uppercase select-none">
+          {displayWords.map((line, li) => (
+            <div key={li} className="overflow-hidden py-2">
+              <span className={`inline-block ${line.color}`}>
+                {line.text.split("").map((ch, ci) => (
+                  <span
+                    key={ci}
+                    className="hero-char inline-block opacity-0"
+                    style={{ display: ch === " " ? "inline" : "inline-block", whiteSpace: "pre" }}
+                  >
+                    {ch === " " ? "\u00A0" : ch}
+                  </span>
+                ))}
+              </span>
+            </div>
+          ))}
         </h1>
 
-        {/* Subtítulo */}
-        <p className="mt-7 max-w-xl text-lg text-slate-500 leading-relaxed font-normal">
-          {t.subtitle}
-        </p>
-
-        {/* Bullets */}
-        <ul className="mt-8 flex flex-wrap items-center justify-center gap-2">
-          {t.bullets.map((b, i) => (
-            <li
-              key={i}
-              className="flex items-center gap-2 rounded-full bg-slate-50 border border-slate-200 px-4 py-1.5 text-sm font-medium text-slate-700"
+        {/* Sub + CTAs */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-8 max-w-5xl mx-auto opacity-0" ref={subRef}>
+          <p className="text-slate-500 text-lg leading-relaxed max-w-sm">
+            {subtitle}
+          </p>
+          <div ref={ctasRef} className="flex flex-wrap gap-4 shrink-0">
+            <Link
+              href="/estimate"
+              data-cursor
+              className="rounded-full bg-blue-600 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 hover:scale-105 transition-all"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-              {b}
-            </li>
-          ))}
-        </ul>
-
-        {/* CTAs */}
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <Link
-            href="/estimate"
-            className="rounded-full bg-slate-900 px-7 py-3 text-sm font-semibold text-white shadow-lg
-                       hover:bg-indigo-600 transition-colors duration-200
-                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-500"
-          >
-            {t.ctaEstimate}
-          </Link>
-
-          <Link
-            href="/portfolio"
-            className="rounded-full border border-slate-200 bg-white px-7 py-3 text-sm font-semibold text-slate-700
-                       hover:border-slate-300 hover:bg-slate-50 transition-colors duration-200"
-          >
-            {t.ctaPortfolio}
-          </Link>
-
-          <a
-            href="https://wa.me/19292406734"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-emerald-200 bg-emerald-50 px-7 py-3 text-sm font-semibold text-emerald-700
-                       hover:bg-emerald-100 transition-colors duration-200"
-          >
-            {t.ctaWhatsApp}
-          </a>
+              {btnPrimary} →
+            </Link>
+            <Link
+              href="/portfolio"
+              data-cursor
+              className="rounded-full border border-slate-200 bg-white px-8 py-4 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50 hover:scale-105 transition-all"
+            >
+              {btnSec}
+            </Link>
+          </div>
         </div>
 
-        {/* Social proof */}
-        <div className="mt-16 flex items-center gap-6 text-xs text-slate-400">
-          <span className="text-amber-400 tracking-wide text-sm">★★★★★</span>
-          <div className="w-px h-4 bg-slate-200" />
-          <span>AI</span>
-          <div className="w-px h-4 bg-slate-200" />
-          <span>NYC based</span>
+        {/* Footer row */}
+        <div className="mt-20 flex w-full justify-between items-end font-medium uppercase text-xs tracking-widest text-slate-400">
+          <p>{footerLeft}</p>
+          <div className="flex gap-1">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <svg key={i} className="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <p className="text-right max-w-[220px]">{footerRight}</p>
         </div>
       </div>
     </section>
