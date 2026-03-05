@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -97,7 +98,7 @@ const SERVICE_PARAM_MAP: Record<string, Service> = {
   maintenance: "maintenance", support: "maintenance",
 };
 
-export default function ProjectPlannerWizard() {
+function ProjectPlannerInner() {
   const searchParams = useSearchParams();
   const [lang, setLang] = useState<Lang>("en");
   const [step, setStep] = useState(1);
@@ -483,5 +484,21 @@ export default function ProjectPlannerWizard() {
         </div>
       )}
     </div>
+}
+
+// Wrap in Suspense so pages using this component can be statically pre-rendered.
+// useSearchParams() requires a Suspense boundary when used in SSR/SSG context.
+export default function ProjectPlanner() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 rounded-full border-2 border-blue-200 border-t-blue-600 animate-spin" />
+          <p className="text-sm text-slate-400 font-medium">Loading planner…</p>
+        </div>
+      </div>
+    }>
+      <ProjectPlannerInner />
+    </Suspense>
   );
 }
