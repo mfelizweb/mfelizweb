@@ -56,6 +56,22 @@ const services = [
     estHref: "/estimate?service=maintenance",
     color: "from-emerald-500 to-teal-400",
   },
+  {
+    key: "seo", emoji: "🔍",
+    title: { es: "SEO & Posicionamiento", en: "SEO & Rankings" },
+    desc: { es: "Aparece en Google y atrae tráfico orgánico calificado.", en: "Rank on Google and attract qualified organic traffic." },
+    href: "/services/seo",
+    estHref: "/estimate?service=seo",
+    color: "from-green-500 to-emerald-400",
+  },
+  {
+    key: "redesign", emoji: "🎨",
+    title: { es: "Rediseño Web", en: "Website Redesign" },
+    desc: { es: "Transforma tu sitio actual en una máquina de ventas.", en: "Turn your existing site into a conversion machine." },
+    href: "/services/redesign",
+    estHref: "/estimate?service=redesign",
+    color: "from-violet-500 to-purple-400",
+  },
 ];
 
 const fadeUp = {

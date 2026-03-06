@@ -6,7 +6,9 @@ import Footer from "@/components/Footer";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const hideUI = pathname?.startsWith("/NFC/Drivers/");
+  const hideUI =
+    pathname?.startsWith("/NFC/Drivers/") ||
+    pathname?.startsWith("/linksdeapps");
 
   return (
     <>
@@ -14,7 +16,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <main className={hideUI ? "min-h-screen" : "min-h-[calc(100vh-160px)]"}>
         {children}
       </main>
-       <Footer /> 
+      {!hideUI && <Footer />}
     </>
   );
 }

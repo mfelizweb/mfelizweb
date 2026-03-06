@@ -4,9 +4,9 @@ import { Inter } from "next/font/google";
 import AppShell from "@/components/AppShell";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
-import WhatsAppChat from "@/components/WhatsAppChat";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import WhatsAppChatConditional from "@/components/WhatsAppChatConditional";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
 
         {/* ✅ WhatsApp Chat Widget */}
-        <WhatsAppChat />
+        <WhatsAppChatConditional />
       </body>
     </html>
   );

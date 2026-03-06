@@ -113,7 +113,7 @@ export default function Hero() {
         </div>
 
         {/* Oversized masked title */}
-        <h1 className="text-center leading-none tracking-tighter text-[15vw] sm:text-[12vw] lg:text-[10vw] font-black uppercase select-none">
+        <h1 className="text-center leading-none tracking-tighter text-[18vw] sm:text-[12vw] lg:text-[10vw] font-black uppercase select-none">
           {displayWords.map((line, li) => (
             <div key={li} className="overflow-hidden py-2">
               <span className={`inline-block ${line.color}`}>
