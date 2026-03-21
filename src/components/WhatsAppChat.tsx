@@ -86,8 +86,8 @@ export default function WhatsAppChat() {
                         id: 1,
                         from: "agent",
                         text: L(
-                            "👋 ¡Hola! Soy Maddiel de mfelizweb.\n¿En qué puedo ayudarte hoy?",
-                            "👋 Hey! I'm Maddiel from mfelizweb.\nHow can I help you today?"
+                            "👋 ¡Hola! ¿Cómo podemos ayudarte hoy?",
+                            "👋 Hello! How can we help you today?"
                         ),
                         time: now(),
                     },
@@ -124,8 +124,8 @@ export default function WhatsAppChat() {
         // Build WhatsApp URL and open after short delay
         const waText = encodeURIComponent(
             L(
-                `Hola Maddiel, te escribo desde mfelizweb.com:\n\n"${text}"`,
-                `Hi Maddiel, I'm writing from mfelizweb.com:\n\n"${text}"`
+                `Hola, te escribo desde mfelizweb.com:\n\n"${text}"`,
+                `Hi, I'm writing from mfelizweb.com:\n\n"${text}"`
             )
         );
         const waUrl = `https://wa.me/${WA_NUMBER}?text=${waText}`;

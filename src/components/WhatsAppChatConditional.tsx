@@ -2,9 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import WhatsAppChat from "@/components/WhatsAppChat";
+// import AIChatWidget from "@/components/AIChatWidget";
 
 /**
- * Renders the WhatsApp chat widget everywhere EXCEPT on routes
+ * Renders the chat widget everywhere EXCEPT on routes
  * where we want a clean, standalone page (e.g. /linksdeapps).
  */
 export default function WhatsAppChatConditional() {
@@ -15,4 +16,5 @@ export default function WhatsAppChatConditional() {
     if (hidden) return null;
 
     return <WhatsAppChat />;
+    // return <AIChatWidget />;
 }

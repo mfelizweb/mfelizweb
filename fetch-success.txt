@@ -1,0 +1,20 @@
+data: {"type":"start"}
+
+data: {"type":"start-step"}
+
+data: {"type":"text-start","id":"0","providerMetadata":{"google":{"thoughtSignature":"CmABvj72+1a+XHLfp0efJYuo8BHSBRXvWwtuafv0z/SzYMKWUsb4PEyXiwjVNqb4TLqR0sWolYxH8Aghy5CI/ZGtURAProp2w7/n50NaeiHXKZaews46hCAGcZCh3HbG3FQKgwIBvj72+5Qv+Trpa7SzC32HZSO+wZ51/iptqtUYBg7H8OKXOEVeqraBKrePNyzB/1axNrzZJr66cr7B5xCL5WgPeRnl1H7v+VarTLLsmcT7q528+Fm2VbFE4VAeiYoUBEQQMPzdjXuiF2JZqczEQSQ5kKP8+Bwqvw9qkp6Cbkd7R62GGpTcjbf4tNSpjB34JfCXH90qbH9+L7vh5n48eoqjWpGakiVVVx43f+iNQcqePVSGydi7AZQ0WvFnyw5JSa7rQTqvAJZfqpZO8M1E29Y1WJJXClnPDRJdskp8x8RZ8Uc+KugSmQmIgYLSJU8xfQgoSJ6E1NII77VoM5TZoRyj8UpcCj8Bvj72+ygECidRBQD+tsTVTt0cK/eoPKSbfyiRHxbioIjTn8aqIWjWTVQyT1f+xYVRPZWKMWQBogjPNLX8aG0="}}}
+
+data: {"type":"text-delta","id":"0","delta":"¡Hola! 👋 Soy Maddi, tu asistente de IA en mfelizweb.com. Estamos aquí para ayudarte con el desarrollo web, sistemas de inteligencia artificial y consultoría. ¿Hay algo específico en lo que","providerMetadata":{"google":{"thoughtSignature":"CmABvj72+1a+XHLfp0efJYuo8BHSBRXvWwtuafv0z/SzYMKWUsb4PEyXiwjVNqb4TLqR0sWolYxH8Aghy5CI/ZGtURAProp2w7/n50NaeiHXKZaews46hCAGcZCh3HbG3FQKgwIBvj72+5Qv+Trpa7SzC32HZSO+wZ51/iptqtUYBg7H8OKXOEVeqraBKrePNyzB/1axNrzZJr66cr7B5xCL5WgPeRnl1H7v+VarTLLsmcT7q528+Fm2VbFE4VAeiYoUBEQQMPzdjXuiF2JZqczEQSQ5kKP8+Bwqvw9qkp6Cbkd7R62GGpTcjbf4tNSpjB34JfCXH90qbH9+L7vh5n48eoqjWpGakiVVVx43f+iNQcqePVSGydi7AZQ0WvFnyw5JSa7rQTqvAJZfqpZO8M1E29Y1WJJXClnPDRJdskp8x8RZ8Uc+KugSmQmIgYLSJU8xfQgoSJ6E1NII77VoM5TZoRyj8UpcCj8Bvj72+ygECidRBQD+tsTVTt0cK/eoPKSbfyiRHxbioIjTn8aqIWjWTVQyT1f+xYVRPZWKMWQBogjPNLX8aG0="}}}
+
+data: {"type":"text-delta","id":"0","delta":" pueda","providerMetadata":{"google":{"thoughtSignature":"CmABvj72+1a+XHLfp0efJYuo8BHSBRXvWwtuafv0z/SzYMKWUsb4PEyXiwjVNqb4TLqR0sWolYxH8Aghy5CI/ZGtURAProp2w7/n50NaeiHXKZaews46hCAGcZCh3HbG3FQKgwIBvj72+5Qv+Trpa7SzC32HZSO+wZ51/iptqtUYBg7H8OKXOEVeqraBKrePNyzB/1axNrzZJr66cr7B5xCL5WgPeRnl1H7v+VarTLLsmcT7q528+Fm2VbFE4VAeiYoUBEQQMPzdjXuiF2JZqczEQSQ5kKP8+Bwqvw9qkp6Cbkd7R62GGpTcjbf4tNSpjB34JfCXH90qbH9+L7vh5n48eoqjWpGakiVVVx43f+iNQcqePVSGydi7AZQ0WvFnyw5JSa7rQTqvAJZfqpZO8M1E29Y1WJJXClnPDRJdskp8x8RZ8Uc+KugSmQmIgYLSJU8xfQgoSJ6E1NII77VoM5TZoRyj8UpcCj8Bvj72+ygECidRBQD+tsTVTt0cK/eoPKSbfyiRHxbioIjTn8aqIWjWTVQyT1f+xYVRPZWKMWQBogjPNLX8aG0="}}}
+
+data: {"type":"text-delta","id":"0","delta":" ayudarte hoy? 😊","providerMetadata":{"google":{"thoughtSignature":"CmABvj72+1a+XHLfp0efJYuo8BHSBRXvWwtuafv0z/SzYMKWUsb4PEyXiwjVNqb4TLqR0sWolYxH8Aghy5CI/ZGtURAProp2w7/n50NaeiHXKZaews46hCAGcZCh3HbG3FQKgwIBvj72+5Qv+Trpa7SzC32HZSO+wZ51/iptqtUYBg7H8OKXOEVeqraBKrePNyzB/1axNrzZJr66cr7B5xCL5WgPeRnl1H7v+VarTLLsmcT7q528+Fm2VbFE4VAeiYoUBEQQMPzdjXuiF2JZqczEQSQ5kKP8+Bwqvw9qkp6Cbkd7R62GGpTcjbf4tNSpjB34JfCXH90qbH9+L7vh5n48eoqjWpGakiVVVx43f+iNQcqePVSGydi7AZQ0WvFnyw5JSa7rQTqvAJZfqpZO8M1E29Y1WJJXClnPDRJdskp8x8RZ8Uc+KugSmQmIgYLSJU8xfQgoSJ6E1NII77VoM5TZoRyj8UpcCj8Bvj72+ygECidRBQD+tsTVTt0cK/eoPKSbfyiRHxbioIjTn8aqIWjWTVQyT1f+xYVRPZWKMWQBogjPNLX8aG0="}}}
+
+data: {"type":"text-end","id":"0"}
+
+data: {"type":"finish-step"}
+
+data: {"type":"finish","finishReason":"stop"}
+
+data: [DONE]
+

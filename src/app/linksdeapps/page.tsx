@@ -27,7 +27,7 @@ const apps = [
         android: "https://play.google.com/store/apps/details?id=com.mfelizweb.hvacepa",
     },
     {
-        name: "CDL Coach DMV",
+        name: "CDL Coach 2026: Exam Prep",
         emoji: "🚛",
         tag: "Driver's License",
         gradient: "from-amber-400 to-orange-600",
@@ -69,6 +69,39 @@ const apps = [
         hookBold: "Estudia las 100 preguntas cívicas",
         ios: "https://apps.apple.com/us/app/citizenship-test-coach/id6758256024",
         android: "https://play.google.com/store/apps/details?id=com.mfelizweb.Citizenship",
+    },
+    {
+        name: "USPS 474 Exam Prep",
+        emoji: "📦",
+        tag: "Postal Service",
+        gradient: "from-blue-700 to-red-600",
+        shadow: "shadow-blue-500/25",
+        hook: "Trabaja en el servicio postal.",
+        hookBold: "Domina el Virtual Entry Assessment",
+        ios: "https://apps.apple.com/us/app/usps-474-exam-prep/id6759227077",
+        android: "https://play.google.com/store/apps/details?id=com.mfelizweb.usps474",
+    },
+    {
+        name: "Elite 1099",
+        emoji: "📊",
+        tag: "Tax & Finance",
+        gradient: "from-slate-700 to-slate-900",
+        shadow: "shadow-slate-500/25",
+        hook: "Control total para freelancers.",
+        hookBold: "Optimiza tus impuestos",
+        ios: "https://apps.apple.com/us/app/elite-1099/id6755654155",
+        android: "https://play.google.com/store/apps/details?id=com.mfelizweb.michequeusa",
+    },
+    {
+        name: "Electrician Journeyman Prep",
+        emoji: "⚡",
+        tag: "Electrical Trade",
+        gradient: "from-yellow-400 to-yellow-600",
+        shadow: "shadow-yellow-500/25",
+        hook: "Conviértete en Journeyman Electrician.",
+        hookBold: "Basado en el NEC 2024",
+        ios: "https://apps.apple.com/us/app/electrician-journeyman-prep/id6759814515",
+        android: "https://play.google.com/store/apps/details?id=com.mfelizweb.electric",
     },
 ];
 
@@ -177,13 +210,33 @@ function AppCard({ app, index }: { app: (typeof apps)[0]; index: number }) {
 }
 
 /* ─── Main Page ───────────────────────────────────────────────── */
+/* ─── Main Page ───────────────────────────────────────────────── */
 export default function LinksDeAppsPage() {
     const [mounted, setMounted] = useState(false);
-    useEffect(() => { setMounted(true); }, []);
+    // 1. Añadimos un nuevo estado para guardar las apps desordenadas
+    const [shuffledApps, setShuffledApps] = useState(apps);
+    
+    useEffect(() => { 
+        setMounted(true); 
+
+        // 2. Función para desordenar el array (Fisher-Yates)
+        const shuffleArray = (array: typeof apps) => {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        };
+
+        // 3. Aplicamos el orden aleatorio al montar la página
+        setShuffledApps(shuffleArray(apps));
+    }, []);
 
     return (
         <>
             {/* Global font */}
+            {/* ... TODO TU CSS SE QUEDA EXACTAMENTE IGUAL AQUÍ ... */}
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -226,11 +279,8 @@ export default function LinksDeAppsPage() {
 
                 {/* ── Animated background ── */}
                 <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                    {/* Dark starfield grain */}
                     <div className="absolute inset-0 opacity-[0.015]"
                         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "150px" }} />
-
-                    {/* Blobs */}
                     <div className="blob absolute top-[-80px] left-[-40px] w-80 h-80 rounded-full bg-emerald-500/[0.12] blur-3xl" />
                     <div className="blob-2 absolute top-1/3 right-[-60px] w-72 h-72 rounded-full bg-violet-500/[0.1] blur-3xl" />
                     <div className="blob-3 absolute bottom-0 left-1/3 w-96 h-64 rounded-full bg-cyan-500/[0.07] blur-3xl" />
@@ -241,21 +291,17 @@ export default function LinksDeAppsPage() {
 
                     {/* Header */}
                     <div className={`text-center mb-8 transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}>
-
-                        {/* Avatar / Brand */}
                         <div className="relative inline-block mb-5 float">
                             <div className="w-[72px] h-[72px] rounded-[22px] bg-gradient-to-br from-emerald-400 to-cyan-500
                 flex items-center justify-center text-3xl shadow-2xl shadow-emerald-500/30 mx-auto">
                                 📱
                             </div>
-                            {/* Live pulse */}
                             <span className="absolute -top-1 -right-1 flex h-4 w-4">
                                 <span className="ping-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
                                 <span className="relative inline-flex h-4 w-4 rounded-full bg-emerald-400 border-2 border-[#06080f]" />
                             </span>
                         </div>
 
-                        {/* Brand tag */}
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
               border border-white/[0.1] bg-white/[0.04] mb-4">
                             <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/50">MFelizWeb</span>
@@ -263,7 +309,6 @@ export default function LinksDeAppsPage() {
                             <span className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-400">Apps</span>
                         </div>
 
-                        {/* Headline */}
                         <h1 className="text-[28px] sm:text-[32px] font-black leading-tight tracking-tight mb-3">
                             <span className="text-white">Certifícate.</span>{" "}
                             <br />
@@ -274,20 +319,6 @@ export default function LinksDeAppsPage() {
                             Apps de estudio para exámenes reales.{" "}
                             <span className="text-emerald-400 font-semibold">Miles ya aprobaron</span> — ahora es tu turno.
                         </p>
-
-                        {/* Stats strip 
-                        <div className="flex items-center justify-center gap-5 mt-6">
-                            {[
-                                { num: "6", label: "Apps" },
-                                { num: "5★", label: "Rating" },
-                                { num: "10K+", label: "Usuarios" },
-                            ].map((s) => (
-                                <div key={s.label} className="text-center">
-                                    <div className="text-white font-black text-[17px] leading-none">{s.num}</div>
-                                    <div className="text-white/30 text-[10px] uppercase tracking-wider mt-0.5">{s.label}</div>
-                                </div>
-                            ))}
-                        </div>*/}
                     </div>
 
                     {/* Divider */}
@@ -297,9 +328,9 @@ export default function LinksDeAppsPage() {
                         <div className="flex-1 h-px bg-white/[0.07]" />
                     </div>
 
-                    {/* App cards */}
+                    {/* 4. AQUI ESTÁ EL CAMBIO CLAVE: Cambiamos 'apps' por 'shuffledApps' en el map */}
                     <div className="flex flex-col gap-3">
-                        {apps.map((app, i) => (
+                        {shuffledApps.map((app, i) => (
                             <AppCard key={app.name} app={app} index={i} />
                         ))}
                     </div>

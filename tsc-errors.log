@@ -1,0 +1,13 @@
+﻿src/app/api/chat/route.ts(3,19): error TS2307: Cannot find module 'zod' or its corresponding type declarations.
+src/app/api/chat/route.ts(35,9): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Type '({ userName, contactInfo, reason }: { userName: string; contactInfo: string; reason: string; }) => Promise<"Email sent to sales team successfully." | "Failed to send email. Tell the user we are experiencing issues and they should manually email info@mfelizweb.com">' is not assignable to type 'undefined'.
+src/app/api/chat/route.ts(66,17): error TS2551: Property 'toDataStreamResponse' does not exist on type 'StreamTextResult<{ request_human_intervention: Tool<{ userName: string; contactInfo: string; reason: string; }, "Email sent to sales team successfully." | "Failed to send email. Tell the user we are experiencing issues and they should manually email info@mfelizweb.com">; }, Output<...>>'. Did you mean 'toTextStreamResponse'?
+src/components/AIChatWidget.tsx(65,23): error TS2339: Property 'input' does not exist on type 'UseChatHelpers<UIMessage<unknown, UIDataTypes, UITools>>'.
+src/components/AIChatWidget.tsx(65,30): error TS2339: Property 'handleInputChange' does not exist on type 'UseChatHelpers<UIMessage<unknown, UIDataTypes, UITools>>'.
+src/components/AIChatWidget.tsx(65,49): error TS2339: Property 'handleSubmit' does not exist on type 'UseChatHelpers<UIMessage<unknown, UIDataTypes, UITools>>'.
+src/components/AIChatWidget.tsx(65,63): error TS2339: Property 'isLoading' does not exist on type 'UseChatHelpers<UIMessage<unknown, UIDataTypes, UITools>>'.
+src/components/AIChatWidget.tsx(65,74): error TS2339: Property 'append' does not exist on type 'UseChatHelpers<UIMessage<unknown, UIDataTypes, UITools>>'.
+src/components/AIChatWidget.tsx(66,9): error TS2353: Object literal may only specify known properties, and 'api' does not exist in type 'UseChatOptions<UIMessage<unknown, UIDataTypes, UITools>>'.
+src/components/AIChatWidget.tsx(114,89): error TS2339: Property 'content' does not exist on type 'UIMessage<unknown, UIDataTypes, UITools>'.
+src/components/AIChatWidget.tsx(210,46): error TS2339: Property 'content' does not exist on type 'UIMessage<unknown, UIDataTypes, UITools>'.

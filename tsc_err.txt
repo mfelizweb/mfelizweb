@@ -1,0 +1,5 @@
+src/app/api/chat/route.ts(35,9): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Type '({ userName, contactInfo, reason }: { userName: string; contactInfo: string; reason: string; }) => Promise<"Email sent to sales team successfully." | "Failed to send email. Tell the user we are experiencing issues and they should manually email info@mfelizweb.com">' is not assignable to type 'undefined'.
+src/app/api/chat/route.ts(66,17): error TS2551: Property 'toDataStreamResponse' does not exist on type 'StreamTextResult<{ request_human_intervention: Tool<{ userName: string; contactInfo: string; reason: string; }, "Email sent to sales team successfully." | "Failed to send email. Tell the user we are experiencing issues and they should manually email info@mfelizweb.com">; }, Output<...>>'. Did you mean 'toTextStreamResponse'?
+src/components/AIChatWidget.tsx(5,34): error TS2307: Cannot find module 'ai/react' or its corresponding type declarations.
