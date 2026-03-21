@@ -118,11 +118,12 @@ tools: {
               await fetch(callMeBotUrl, { method: 'GET' });
 
               return "Notificación enviada con éxito.";
-            } catch (error) {
+} catch (error) {
               console.error("Error enviando notificaciones:", error);
               return "Fallo al enviar la notificación.";
             }
           },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any),
       },
       
