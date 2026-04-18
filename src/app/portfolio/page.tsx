@@ -20,7 +20,34 @@ interface Project {
 }
 
 const PROJECTS: Project[] = [
-
+  {
+    id: 16,
+    title: "NY Real Estate Coach",
+    category: ["mobile", "ai"],
+    tags: ["React Native", "Supabase", "RevenueCat", "AI"],
+    image: "/realstate.png",
+    year: "2026",
+    platform: "iOS & Android",
+    accent: "from-rose-500 to-pink-400",
+    description: {
+      en: "Complete exam preparation for the New York Real Estate Salesperson exam with smart learning algorithms and practice modes.",
+      es: "Preparación completa para el examen de Real Estate de NY con algoritmos de aprendizaje inteligente.",
+    },
+  },
+  {
+    id: 17,
+    title: "Pesticide Applicator Coach",
+    category: ["mobile", "ai"],
+    tags: ["React Native", "Supabase", "RevenueCat", "AI"],
+    image: "/pesticide.png",
+    year: "2026",
+    platform: "iOS & Android",
+    accent: "from-lime-500 to-green-400",
+    description: {
+      en: "Specialized training app for the Pesticide Applicator exam featuring adaptive learning technology and full exam simulations.",
+      es: "App de entrenamiento especializado para el examen de Aplicador de Pesticidas con tecnología de aprendizaje adaptativo.",
+    },
+  },
   {
     id: 2,
     title: "TSA CBT Coach",
@@ -417,10 +444,10 @@ export default function PortfolioPage() {
           className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-100 rounded-3xl overflow-hidden border border-slate-100 mb-16"
         >
           {[
-            { target: 15, suffix: "+", label_en: "Projects", label_es: "Proyectos" },
-            { target: 9, suffix: "+", label_en: "Live apps", label_es: "Apps en producción" },
+            { target: 20, suffix: "+", label_en: "Projects", label_es: "Proyectos" },
+            { target: 12, suffix: "+", label_en: "Live apps", label_es: "Apps en producción" },
             { target: 3, suffix: "", label_en: "Platforms", label_es: "Plataformas" },
-            { target: 40, suffix: "+", label_en: "Downloads (K)", label_es: "Descargas (K)" },
+            { target: 60, suffix: "+", label_en: "Downloads (K)", label_es: "Descargas (K)" },
           ].map((s, i) => (
             <div key={i} className="bg-white px-8 py-8 text-center group hover:bg-slate-50 transition-colors">
               <div className="text-4xl font-black text-slate-900 tracking-tight group-hover:text-blue-600 transition-colors duration-300 tabular-nums">

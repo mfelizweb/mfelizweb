@@ -103,6 +103,28 @@ const apps = [
         ios: "https://apps.apple.com/us/app/electrician-journeyman-prep/id6759814515",
         android: "https://play.google.com/store/apps/details?id=com.mfelizweb.electric",
     },
+    {
+        name: "NY Real Estate Exam Coach",
+        emoji: "🏠",
+        tag: "Real Estate License",
+        gradient: "from-rose-500 to-pink-600",
+        shadow: "shadow-rose-500/25",
+        hook: "Tu licencia de Real Estate en NY.",
+        hookBold: "Pasa el examen a la primera",
+        ios: "https://apps.apple.com/us/app/ny-real-estate-exam-coach-2026/id6761790218",
+        android: "https://play.google.com/store/apps/details?id=com.mfelizweb.realstate",
+    },
+    {
+        name: "Pesticide Applicator Coach",
+        emoji: "🌿",
+        tag: "Pesticide License",
+        gradient: "from-lime-500 to-green-600",
+        shadow: "shadow-lime-500/25",
+        hook: "Certifícate como Aplicador de Pesticidas.",
+        hookBold: "Estudio enfocado y efectivo",
+        ios: "https://apps.apple.com/us/app/pesticide-applicator-coach/id6760911378",
+        android: "https://play.google.com/store/apps/details?id=com.mfelizweb.pesticide",
+    },
 ];
 
 /* ─── Icons ───────────────────────────────────────────────────── */
@@ -200,7 +222,7 @@ function AppCard({ app, index }: { app: (typeof apps)[0]; index: number }) {
                 ${pressed === "android" ? "scale-95 opacity-80" : "hover:border-white/20 active:scale-95"}`}
                         >
                             <AndroidIcon />
-                            Google Play
+                            Play Store
                         </a>
                     </div>
                 </div>
@@ -215,9 +237,9 @@ export default function LinksDeAppsPage() {
     const [mounted, setMounted] = useState(false);
     // 1. Añadimos un nuevo estado para guardar las apps desordenadas
     const [shuffledApps, setShuffledApps] = useState(apps);
-    
-    useEffect(() => { 
-        setMounted(true); 
+
+    useEffect(() => {
+        setMounted(true);
 
         // 2. Función para desordenar el array (Fisher-Yates)
         const shuffleArray = (array: typeof apps) => {
