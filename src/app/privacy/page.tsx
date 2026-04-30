@@ -10,13 +10,14 @@ export const metadata = {
   robots: { index: true, follow: true },
 };
 
-const LAST_UPDATED = "March 10, 2026";
+const LAST_UPDATED = "April 30, 2026";
 const SUPPORT_EMAIL = "info@mfelizweb.com";
 const BRAND_NAME = "mfelizweb";
 
 export default function PrivacyPage() {
   const sections = [
     { id: "information-we-collect", label: "Information We Collect" },
+    { id: "location-data", label: "Location Data Disclosure" }, // <-- Nuevo item en navegación
     { id: "how-we-use-information", label: "How We Use Information" },
     { id: "data-sharing", label: "Data Sharing" },
     { id: "data-retention", label: "Data Retention" },
@@ -79,6 +80,30 @@ export default function PrivacyPage() {
               our apps to sync your experience across devices.
             </li>
           </ul>
+
+          {/* NUEVA SECCIÓN: Location Data Disclosure */}
+          <h2 id="location-data">Location Data Disclosure</h2>
+          <p>
+            To provide core functionalities within specific applications, we require access to your device's location. By using these features, you consent to the following:
+          </p>
+          <ul>
+            <li>
+              <strong>Collection:</strong> We may collect precise (GPS) and/or coarse (network-based) location data.
+            </li>
+            <li>
+              <strong>Usage:</strong> This data is strictly used to (a) display geographically relevant content, (b) provide necessary geolocation services for the app to function, and (c) deliver location-based push notifications if enabled.
+            </li>
+            <li>
+              <strong>Background Access:</strong> Some of our applications may access location data in the background (even when the app is closed or not in use) to enable specific real-time features. This will only occur if you explicitly grant background location permissions within the app.
+            </li>
+            <li>
+              <strong>Data Sharing:</strong> Location data may be shared with essential service providers, such as Google Maps API, solely for map rendering purposes. <strong>We do not sell your location data to third parties.</strong>
+            </li>
+          </ul>
+          <p>
+            <em>You can revoke location access at any time through your device's system settings.</em>
+          </p>
+          {/* FIN NUEVA SECCIÓN */}
 
           <h2 id="how-we-use-information">How We Use Information</h2>
           <p>We process your data to:</p>
